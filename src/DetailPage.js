@@ -7,8 +7,6 @@ import communityImg from './image/community.png';
 import detailImg from './image/detail.png';
 import instagramImg from './image/instagram.png';
 
-const HEADER_HEIGHT = 0; // 더 이상 필요 없음
-
 const DetailPage = ({ num = 1 }) => {
   const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
@@ -27,10 +25,10 @@ const DetailPage = ({ num = 1 }) => {
   const projectSections = {
     1: [
       {
-        id: 'SPOT',
+        id: 'SITE',
         isTitle: true,
         title: '모든 단체 스포츠를 위한',
-        highlight: '인원 모집 플랫폼. SPOT',
+        highlight: '인원 모집 플랫폼. SITE',
         hashtag: '#축구뿐만 아니라 농구, 배드민턴, 야구, 배구 등 모든 스포츠',
         description: '스크롤하여 더 자세히 알아보세요.',
       },

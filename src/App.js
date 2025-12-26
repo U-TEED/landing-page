@@ -22,7 +22,7 @@ function Header({ onNavClick }) {
       <div className="header-content">
         <span className="header-logo" style={{cursor: 'pointer'}} onClick={handleLogoClick}>U-TEED</span>
         <nav className="header-nav">
-          <button onClick={() => onNavClick('section-1')}>SPOT</button>
+          <button onClick={() => onNavClick('section-1')}>SITE</button>
           <button onClick={() => onNavClick('section-2')}>프로젝트 의뢰하기</button>
         </nav>
       </div>
@@ -33,7 +33,7 @@ function Header({ onNavClick }) {
 const sections = [
   {
     title: '지금 당신 주변의 모든 운동.',
-    highlight: 'SPOT',
+    highlight: 'SITE',
     hashtag: '#축구뿐만 아니라 농구, 배드민턴, 야구, 배구 등 모든 스포츠를 위한',
     image: null,
     detailLink: '/detail/1',
