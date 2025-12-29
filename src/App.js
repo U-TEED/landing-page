@@ -42,7 +42,7 @@ const sections = [
     title: '프로젝트 준비중...',
     highlight: '다른 프로젝트도 의뢰해보세요!',
     hashtag: '#내가_기획하는',
-    detailLink: "mailto:admin@u-teed.co.kr",
+    detailLink: "mailto:uteed.co@gmail.com",
   }
 ];
 
@@ -67,7 +67,7 @@ function ParallaxSection({ title, highlight, hashtag, image, index, scrollY, det
     if (index === 0) {
       navigate(detailLink);
     } else {
-      window.location.href = 'mailto:admin@u-teed.co.kr';
+      window.location.href = 'mailto:uteed.co@gmail.com';
     }
   };
 
@@ -115,10 +115,10 @@ function FooterSection({ visible, footerRef }) {
         <div></div>
         {/* 버튼 영역 */}
         <div style={{display: 'flex', gap: '1.2rem', marginTop: '1.7rem'}}>
-          <a href="https://instagram.com/spot_uteed" target="_blank" rel="noopener noreferrer" className="footer-btn">
+          <a href="https://instagram.com/site_uteed" target="_blank" rel="noopener noreferrer" className="footer-btn">
             <img src={instagramImg} alt="Instagram" width="16" height="16" />
           </a>
-          <a href="mailto:admin@u-teed.co.kr" className="footer-btn">
+          <a href="mailto:uteed.co@gmail.com" className="footer-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 4h20v16H2V4zm2 2v12h16V6H4zm8 5l8-5H4l8 5zm0 2l-8-5v10h16V8l-8 5z" fill="#fff"/>
             </svg>
