@@ -7,7 +7,7 @@ import Header from '@/components/Header';
 import FooterSection from '@/components/FooterSection';
 import styles from './site.module.css';
 
-const EMAIL = 'uteed.co@gmail.com';
+const EMAIL = 'site@u-teed.co.kr';
 
 // 섹션 정의
 const sections = [
