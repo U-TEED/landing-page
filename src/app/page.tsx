@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import ParallaxSection from '@/components/ParallaxSection';
 import FooterSection from '@/components/FooterSection';
 import SurveyPopup from '@/components/SurveyPopup';
+import TeamSection from '@/components/TeamSection';
 import { Section } from '@/types';
 
 const sections: Section[] = [
@@ -80,6 +81,7 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
           id={`section-${i + 1}`}
         />
       ))}
+      <TeamSection sectionRef={sectionRefs[2]} id="section-3" />
       <FooterSection visible={footerInView} footerRef={footerRef} />
     </div>
   );

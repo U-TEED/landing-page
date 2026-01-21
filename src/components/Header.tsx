@@ -31,6 +31,7 @@ export default function Header({ onNavClick }: HeaderProps) {
         <nav className="header-nav">
           <button onClick={() => onNavClick('section-1')}>SITE</button>
           <button onClick={() => onNavClick('section-2')}>프로젝트 의뢰하기</button>
+          <button onClick={() => onNavClick('section-3')}>팀 소개</button>
         </nav>
       </div>
     </header>

@@ -113,7 +113,7 @@ code {
 }
 
 /* Parallax Section */
-.parallax-section, .footer-section {
+.parallax-section, .footer-section, .team-section {
   min-height: 100vh;
   scroll-snap-align: start;
   width: 100vw;

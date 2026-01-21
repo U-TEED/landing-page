@@ -1,0 +1,321 @@
+/* Team section styles aligned with SITE detail page */
+
+.teamSection {
+  --bg: #ffffff;
+  --text: #0b0d12;
+  --muted: rgba(11, 13, 18, 0.62);
+  --muted2: rgba(11, 13, 18, 0.46);
+  --line: rgba(11, 13, 18, 0.1);
+  --line-strong: rgba(11, 13, 18, 0.16);
+  --card: rgba(255, 255, 255, 0.7);
+  --shadow-soft: 0 12px 30px rgba(11, 13, 18, 0.06);
+  --shadow: 0 18px 50px rgba(11, 13, 18, 0.08);
+  --radius: 18px;
+  --radius-lg: 26px;
+  --accent: #2185ff;
+  --max: 1120px;
+  --font-title: 'Paperlogy', 'Pretendard', sans-serif;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  font-family: var(--font-body);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+  padding: clamp(40px, 5vw, 80px) 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.sectionSoft::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.sectionContent {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--muted2);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.h2 {
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 800;
+  font-family: var(--font-title);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0 0 14px 0;
+}
+
+.lead {
+  font-size: clamp(15px, 1.7vw, 18px);
+  color: var(--muted);
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Team layout */
+.teamGroup {
+  margin-top: 40px;
+}
+
+.teamGroup:first-of-type {
+  margin-top: 32px;
+}
+
+.teamSplitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.teamSplitRow .teamGroup {
+  margin-top: 0;
+}
+
+.teamCategoryTitle {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: var(--font-title);
+  color: var(--text);
+  letter-spacing: 0;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--line);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.teamGridTwo {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.teamGridOne {
+  grid-template-columns: 1fr;
+}
+
+.teamCard {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teamCardInactive {
+  opacity: 0.55;
+  filter: grayscale(0.85);
+  box-shadow: none;
+  position: relative;
+}
+
+.teamCardInactive .teamRole {
+  background: rgba(11, 13, 18, 0.06);
+  color: rgba(11, 13, 18, 0.6);
+}
+
+.teamCardInactive .teamAvatar {
+  background: rgba(11, 13, 18, 0.12);
+}
+
+.teamCardInactive:hover {
+  transform: none;
+}
+
+.teamCardInactive::after {
+  content: attr(data-inactive-reason);
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translate(-50%, -100%);
+  background: rgba(11, 13, 18, 0.9);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  box-shadow: 0 8px 20px rgba(11, 13, 18, 0.2);
+}
+
+.teamCardInactive:hover::after {
+  opacity: 1;
+}
+
+.teamCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.teamAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #2185ff;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: var(--font-title);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.teamAvatarWithImage {
+  background: transparent;
+}
+
+.teamAvatarImg {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.teamInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.teamName {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-title);
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.teamRole {
+  font-size: 13px;
+  font-family: var(--font-body);
+  color: #fff;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: #2185ff;
+  border-radius: 999px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.teamDesc {
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.teamSchool {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.schoolName {
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--muted);
+}
+
+.majorName {
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--muted2);
+}
+
+@media (max-width: 980px) {
+  .teamGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teamSplitRow {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .teamCategoryTitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teamCard {
+    padding: 20px;
+  }
+
+  .teamAvatar {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .teamAvatarImg {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .teamGroup {
+    margin-top: 32px;
+  }
+}
