@@ -177,14 +177,14 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.08fr .92fr;
+  grid-template-columns: 1fr;
   gap: clamp(18px, 3vw, 38px);
   align-items: center;
 }
 
 .heroTitle {
   margin: 0 0 18px;
-  font-size: clamp(32px, 3.8vw, 52px);
+  font-size: clamp(30px, 3.8vw, 52px);
   letter-spacing: -0.01em;
   line-height: 1.25;
   font-family: var(--font-title);
@@ -346,9 +346,9 @@
   margin: 0 0 14px;
   font-size: 13px;
   color: var(--muted);
-  letter-spacing: .14em;
+  letter-spacing: -0.3px;
   text-transform: uppercase;
-  font-family: var(--font-title);
+  font-family: var(--font-body);
   font-weight: 600;
 }
 
@@ -816,7 +816,7 @@
   color: #fff;
   font-size: 24px;
   font-weight: 700;
-  font-family: var(--font-title);
+  font-family: var(--font-body);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -850,7 +850,7 @@
 .teamName {
   font-size: 18px;
   font-weight: 700;
-  font-family: var(--font-title);
+  font-family: var(--font-body);
   color: var(--text);
   letter-spacing: -0.02em;
 }

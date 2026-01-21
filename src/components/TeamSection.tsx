@@ -9,7 +9,7 @@ const teamGroups = [
       {
         name: '임태호',
         role: '대표 / 기획',
-        desc: '프로젝트 총괄 및 서비스 기획',
+        desc: '서비스 총괄 및 기획',
         school: '연세대학교',
         major: '신학과',
         profileImage: '/images/team/임태호.png',

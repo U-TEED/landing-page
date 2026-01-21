@@ -77,7 +77,7 @@ export default function ParallaxSection({
         <h1>{highlight}</h1>
         <p className="hashtag">{hashtag}</p>
         <button className="detail-btn" onClick={handleDetailClick}>
-          {index === 1 ? '의뢰하기' : '자세히 보기'}
+          자세히 보기
         </button>
       </div>
       {/* 두 번째, 세 번째 섹션: 아래 큰 이미지만 */}

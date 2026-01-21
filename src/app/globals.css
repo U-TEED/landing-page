@@ -109,6 +109,45 @@ code {
   text-decoration: underline;
 }
 
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: 1.2rem;
+}
+
+.header-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #fff;
+  color: #222;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.header-cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.18);
+}
+
+.header-cta-primary {
+  background: #2185FF;
+  border-color: #2185FF;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(33,133,255,0.2);
+}
+
+.header-cta-primary:hover {
+  border-color: #2185FF;
+}
+
 /* Snap Container */
 .snap-container {
   scroll-snap-type: y mandatory;
@@ -150,9 +189,11 @@ code {
 
 .text-block h2 {
   font-size: 1.9rem;
-  font-weight: 500;
+  font-weight: 550;
   color: #3f3f3f;
   margin: 0 0 0.5em 0;
+  letter-spacing: -0.3px;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif;
 }
 
 .text-block h1 {
@@ -161,12 +202,14 @@ code {
   color: #000;
   margin: 0 0 0.5em 0;
   letter-spacing: -2px;
+  letter-spacing: -0.3px;
 }
 
 .text-block .hashtag {
   font-size: 1.1rem;
   color: #222;
   margin-bottom: 1.5em;
+  font-family: 'Pretendard', sans-serif;
 }
 
 /* Parallax Image */
@@ -248,9 +291,9 @@ code {
   transition: background 0.18s, border 0.18s, color 0.18s;
   cursor: pointer;
   box-shadow: none;
-  padding: 0.5rem;
-  width: 25px;
-  height: 25px;
+  padding: 0.7rem;
+  width: 36px;
+  height: 36px;
 }
 
 .footer-btn:hover {
@@ -261,6 +304,8 @@ code {
 .footer-btn img, .footer-btn svg {
   display: inline-block;
   vertical-align: middle;
+  width: 20px;
+  height: 20px;
 }
 
 .footer-content.company-footer {
@@ -1062,6 +1107,10 @@ code {
   .header-nav button {
     font-size: 0.9rem;
   }
+
+  .header-cta {
+    display: none;
+  }
   
   .parallax-logo-img {
     width: 200px;
@@ -1079,9 +1128,9 @@ code {
   }
   
   .footer-btn {
-    width: 22px;
-    height: 22px;
-    padding: 0.4rem;
+    width: 30px;
+    height: 30px;
+    padding: 0.55rem;
   }
   
   .footer-content.company-footer {

@@ -10,17 +10,11 @@ import { Section } from '@/types';
 
 const sections: Section[] = [
   {
-    title: '농구의 인사이트, SITE.',
+    title: 'Your Game, Our SITE',
     highlight: 'SITE',
-    hashtag: '#축구뿐만 아니라 농구, 배드민턴, 야구, 배구 등 모든 스포츠를 위한',
+    hashtag: '#농구_픽업게임을_앱에서_손쉽게 #용품구매도_이젠_앱으로',
     image: null,
     detailLink: '/detail/1',
-  },
-  {
-    title: '프로젝트 준비중...',
-    highlight: '다른 프로젝트도 의뢰해보세요!',
-    hashtag: '#내가_기획하는',
-    detailLink: 'mailto:uteed.co@gmail.com',
   },
 ];
 
@@ -78,10 +72,10 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
           index={i}
           scrollY={scrollY}
           sectionRef={sectionRefs[i]}
-          id={`section-${i + 1}`}
+          id={i === 0 ? 'service' : `section-${i + 1}`}
         />
       ))}
-      <TeamSection sectionRef={sectionRefs[2]} id="section-3" />
+      <TeamSection sectionRef={sectionRefs[1]} id="partner" />
       <FooterSection visible={footerInView} footerRef={footerRef} />
     </div>
   );
@@ -91,16 +85,26 @@ export default function Home() {
   const sectionRefs = [
     useRef<HTMLElement | null>(null),
     useRef<HTMLElement | null>(null),
-    useRef<HTMLElement | null>(null),
   ];
 
   const handleNavClick = (id: string) => {
-    const idx: Record<string, number> = {
-      'section-1': 0,
-      'section-2': 1,
-      'section-3': 2,
-    };
-    sectionRefs[idx[id]]?.current?.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'section-2') {
+      window.location.href = 'mailto:admin@u-teed.co.kr';
+      return;
+    }
+    if (id === 'section-3') {
+      sectionRefs[1]?.current?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    if (id === 'contact') {
+      document.querySelector('.footer-section')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    if (id === 'partner') {
+      sectionRefs[1]?.current?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    sectionRefs[0]?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
