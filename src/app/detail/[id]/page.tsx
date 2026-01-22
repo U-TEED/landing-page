@@ -10,6 +10,39 @@ const EMAIL = 'site@u-teed.co.kr';
 const BETA_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSePB2wt08eZymrTUKA3ZDGZV5vu5DTVhDH9kOCsEcGan6TcEQ/viewform?pli=1';
 
+const serviceSections = [
+  {
+    id: 'service',
+    eyebrow: '픽업게임',
+    title: '내 주변에서 열리는 경기부터 연결합니다.',
+    description:
+      '지금 주변에서 열리는 픽업게임을 시간대 기준으로 모아 보여주고, 참여 조건을 한 번에 확인합니다. 카페 글/댓글/채팅으로 흩어진 정보를 앱 안에서 정리해 빠르게 선택할 수 있게 하는 흐름이에요.',
+    image: '/images/community.png',
+    ctaLabel: '픽업게임 흐름 보기',
+    ctaHref: BETA_FORM_URL,
+  },
+  {
+    id: 'service-reserve',
+    eyebrow: '시설 예약(추후)',
+    title: '시설 탐색부터 예약까지 이어질 수 있게.',
+    description:
+      '픽업게임과 시설 탐색 경험을 자연스럽게 연결하는 방향을 준비 중입니다. 시설 정보 확인 → 가능 시간 확인 → 예약까지 이어지는 흐름을 다음 단계에서 확장합니다.',
+    image: '/images/detail.png',
+    ctaLabel: '시설 예약 이야기 나누기',
+    ctaHref: `mailto:${EMAIL}?subject=${encodeURIComponent('[SITE] 시설 예약 관련 문의')}`,
+  },
+  {
+    id: 'service-operator',
+    eyebrow: '운영자 도구(추후)',
+    title: '운영자가 관리하기 쉬운 흐름으로.',
+    description:
+      '운영자가 일정/모집/운영 정보를 효율적으로 관리할 수 있는 도구를 준비 중입니다. 베타/파일럿 피드백을 반영해 실제 운영 흐름에 맞게 확장할 계획이에요.',
+    image: '/images/home.png',
+    ctaLabel: '운영자 도구 이야기 나누기',
+    ctaHref: `mailto:${EMAIL}?subject=${encodeURIComponent('[SITE] 운영자 도구 관련 문의')}`,
+  },
+];
+
 // 섹션 정의
 const sections = [
   { id: 'top', label: 'Intro' },
@@ -50,6 +83,9 @@ export default function SiteLandingPage() {
   const footerRef = useRef<HTMLElement>(null!);
   const [activeSection, setActiveSection] = useState<string>('top');
   const [mounted, setMounted] = useState(false);
+  const [activeServiceId, setActiveServiceId] = useState<string | null>(null);
+  const [serviceModalOpen, setServiceModalOpen] = useState(false);
+  const [serviceModalClosing, setServiceModalClosing] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -82,6 +118,32 @@ export default function SiteLandingPage() {
     sectionElements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [mounted]);
+
+  useEffect(() => {
+    if (!serviceModalOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleCloseServiceModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [serviceModalOpen]);
+
+  useEffect(() => {
+    if (!activeServiceId) {
+      setServiceModalOpen(false);
+      setServiceModalClosing(false);
+    }
+  }, [activeServiceId]);
+
+  const handleCloseServiceModal = () => {
+    setServiceModalClosing(true);
+    window.setTimeout(() => {
+      setServiceModalOpen(false);
+      setServiceModalClosing(false);
+    }, 280);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -118,6 +180,39 @@ export default function SiteLandingPage() {
     revealElements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const sectionElements = serviceSections
+      .map((section) => document.getElementById(section.id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (sectionElements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const intersecting = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (intersecting.length === 0) {
+          setActiveServiceId(null);
+          return;
+        }
+
+        const id = intersecting[0].target.id;
+        setActiveServiceId(id);
+      },
+      { rootMargin: '-25% 0px -45% 0px', threshold: [0.2, 0.5, 0.8] }
+    );
+
+    sectionElements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [mounted]);
+
+  const activeService = activeServiceId
+    ? serviceSections.find((section) => section.id === activeServiceId)
+    : null;
 
   return (
     <div className={styles.scrollContainer}>
@@ -167,30 +262,95 @@ export default function SiteLandingPage() {
         </div>
       </main>
 
-      {/* Service Overview Section */}
-      <section id="service" className={`${styles.section} ${styles.sectionSoft}`}>
-        <div className={`${styles.container} ${styles.sectionContent}`}>
-          <div className={styles.reveal} >
-            <p className={styles.eyebrow}>서비스</p>
-            <h2 className={styles.h2}>서비스 한눈에</h2>
-
-            <div className={styles.features}>
-              <div className={`${styles.f} ${styles.reveal}`} >
-                <h3 className={styles.fTitle}>픽업게임</h3>
-                <p className={styles.fDesc}>내 주변/시간대 기준으로 찾고 신청</p>
+      {serviceSections.map((section, index) => (
+        <section
+          key={section.id}
+          id={section.id}
+          className={`${styles.section} ${styles.sectionSoft}`}
+        >
+          <div className={`${styles.container} ${styles.sectionContent}`}>
+            <div
+              className={`${styles.serviceShowcase} ${
+                index % 2 === 1 ? styles.serviceShowcaseReverse : ''
+              } ${styles.reveal}`}
+            >
+              <div className={styles.serviceText}>
+                <p className={styles.eyebrow}>{section.eyebrow}</p>
+                <h2 className={styles.h2}>{section.title}</h2>
+                <p className={styles.lead}>{section.description}</p>
               </div>
-              <div className={`${styles.f} ${styles.reveal}`} >
-                <h3 className={styles.fTitle}>시설 예약(추후)</h3>
-                <p className={styles.fDesc}>나중에 시설 탐색/예약 확장</p>
-              </div>
-              <div className={`${styles.f} ${styles.reveal}`} >
-                <h3 className={styles.fTitle}>운영자 도구(추후)</h3>
-                <p className={styles.fDesc}>나중에 관리자 기능 확장</p>
+              <div className={styles.serviceImageWrap}>
+                <Image
+                  src={section.image}
+                  alt={section.title}
+                  width={520}
+                  height={360}
+                  className={styles.serviceImage}
+                />
               </div>
             </div>
           </div>
+        </section>
+      ))}
+
+      {activeService && (
+        <div
+          className={`${styles.serviceCta} ${styles.serviceCtaVisible}`}
+          role="status"
+          aria-live="polite"
+        >
+          <div className={styles.serviceCtaText}>
+            <span className={styles.serviceCtaTitle}>{activeService.ctaLabel}</span>
+          </div>
+          <button
+            className={styles.serviceCtaButton}
+            aria-label={`${activeService.ctaLabel} 열기`}
+            type="button"
+            onClick={() => setServiceModalOpen(true)}
+          >
+            <span className={styles.serviceCtaButtonIcon} aria-hidden="true">
+              <svg viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                <path d="M25.5,16.5h-5.9v-5.9c0-0.9-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v5.9h-5.9C9.7,16.5,9,17.1,9,18s0.7,1.5,1.5,1.5h5.9v5.9c0,0.9,0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5v-5.9h5.9c0.9,0,1.5-0.7,1.5-1.5S26.3,16.5,25.5,16.5z" />
+              </svg>
+            </span>
+          </button>
         </div>
-      </section>
+      )}
+
+      {activeService && serviceModalOpen && (
+        <div
+          className={`${styles.serviceModalOverlay} ${
+            serviceModalClosing ? styles.serviceModalOverlayClosing : ''
+          }`}
+          onClick={handleCloseServiceModal}
+          role="presentation"
+        >
+          <div
+            className={`${styles.serviceModal} ${
+              serviceModalClosing ? styles.serviceModalClosing : ''
+            }`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="service-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={styles.serviceModalHeader}>
+              <h3 id="service-modal-title" className={styles.serviceModalTitle}>
+                {activeService.ctaLabel}
+              </h3>
+              <button
+                type="button"
+                className={styles.serviceModalClose}
+                onClick={handleCloseServiceModal}
+                aria-label="닫기"
+              >
+                ×
+              </button>
+            </div>
+            <p className={styles.serviceModalBody}>{activeService.description}</p>
+          </div>
+        </div>
+      )}
 
       {/* Beta Section */}
       <section id="beta" className={`${styles.section} ${styles.sectionSoft}`}>
