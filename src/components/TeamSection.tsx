@@ -82,6 +82,14 @@ const teamGroups = [
         major: '시각디자인학과',
         profileImage: '/images/team/최수진.png',
       },
+      {
+        name: '박혜원',
+        role: 'SNS 마케팅',
+        desc: 'SNS 마케팅 자료 제작',
+        school: '경희대학교',
+        major: '디지털콘텐츠학과',
+        profileImage: '/images/team/박혜원.png',
+      },
     ],
   },
 ];

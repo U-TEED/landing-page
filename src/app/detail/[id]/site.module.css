@@ -177,9 +177,40 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(18px, 3vw, 38px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(12px, 2vw, 24px);
   align-items: center;
+}
+
+.heroContent {
+  max-width: 56ch;
+}
+
+.heroLogoPanel {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  perspective: 700px;
+  --logo-tilt-x: 0deg;
+  --logo-tilt-y: 0deg;
+  --logo-shift-x: 0px;
+  --logo-shift-y: 0px;
+}
+
+.heroLogo {
+  width: clamp(140px, 20vw, 240px);
+  height: clamp(140px, 20vw, 240px);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  background: #fff;
+  object-fit: contain;
+  transform:
+    translate3d(var(--logo-shift-x), var(--logo-shift-y), 0)
+    rotateX(var(--logo-tilt-x))
+    rotateY(var(--logo-tilt-y));
+  transition: transform 70ms ease-out;
+  will-change: transform;
 }
 
 .heroTitle {
