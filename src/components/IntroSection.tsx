@@ -101,9 +101,20 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
 
   const aboutIndex = phrases.length;
   const schoolIndex = phrases.length + 1;
+  const totalSlides = phrases.length + 2;
+  
+  const currentSlide = visibleSlides.findIndex(v => v);
 
   return (
     <div ref={sectionRef as RefObject<HTMLDivElement>} className="intro-wrapper" id="intro">
+      <div className="side-indicator">
+        {Array.from({ length: totalSlides }).map((_, i) => (
+          <div 
+            key={i} 
+            className={`indicator-dot ${currentSlide === i ? 'active' : ''}`}
+          />
+        ))}
+      </div>
       {phrases.map((phrase, i) => (
         <div
           key={i}
