@@ -180,7 +180,7 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
                   height={120}
                   quality={100}
                   unoptimized
-                  className={`marquee-image school-logo ${img.name === '연세대학교' ? 'yonsei' : ''}`}
+                  className={`marquee-image school-logo ${img.name === '연세대학교' ? 'yonsei' : img.name === '경희대학교' ? 'kyunghee' : ''}`}
                 />
               </div>
             ))}
