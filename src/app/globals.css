@@ -254,9 +254,10 @@ code {
   align-items: center;
   justify-content: center;
   padding: 120px 2rem 60px;
-  background: #000;
+  background: #fff;
   position: relative;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .intro-slide.intro-about {
@@ -278,14 +279,14 @@ code {
 .phrase-text {
   font-size: 5rem;
   font-weight: 900;
-  color: #fff;
+  color: #000;
   letter-spacing: -2px;
   margin-bottom: 1rem;
 }
 
 .phrase-sub {
   font-size: 1.4rem;
-  color: rgba(255,255,255,0.6);
+  color: #666;
   font-weight: 400;
 }
 
@@ -369,13 +370,6 @@ code {
   color: #888;
 }
 
-.intro-slide:not(.intro-about) .intro-scroll-indicator {
-  opacity: 0.4;
-}
-
-.intro-slide:not(.intro-about) .scroll-arrow {
-  color: rgba(255,255,255,0.6);
-}
 
 .scroll-arrow {
   font-size: 1.2rem;
