@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import IntroSection from '@/components/IntroSection';
 import ParallaxSection from '@/components/ParallaxSection';
 import FooterSection from '@/components/FooterSection';
-import SurveyPopup from '@/components/SurveyPopup';
 import { Section } from '@/types';
 
 const sections: Section[] = [
@@ -28,7 +27,6 @@ const sections: Section[] = [
 function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<HTMLElement | null>[], introRef: MutableRefObject<HTMLElement | null> }) {
   const [scrollY, setScrollY] = useState(0);
   const [footerInView, setFooterInView] = useState(false);
-  const [showSurveyPopup, setShowSurveyPopup] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const footerRef = useRef<HTMLElement>(null!);
@@ -93,19 +91,6 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    try {
-      const hideUntilStr = window.localStorage.getItem('surveyPopupHideUntil') || '0';
-      const hideUntil = parseInt(hideUntilStr, 10);
-      if (hideUntil > Date.now()) {
-        return;
-      }
-    } catch {
-      // ignore storage errors
-    }
-    const timer = setTimeout(() => {
-      setShowSurveyPopup(true);
-    }, 1000);
-    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -126,15 +111,10 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
     return () => observer.disconnect();
   }, []);
 
-  const closeSurveyPopup = () => {
-    setShowSurveyPopup(false);
-  };
-
   const totalSections = 4 + sections.length;
 
   return (
     <div className="App snap-container">
-      <SurveyPopup isOpen={showSurveyPopup} onClose={closeSurveyPopup} />
       <div className="side-indicator">
         {Array.from({ length: totalSections }).map((_, i) => (
           <div 
