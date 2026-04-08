@@ -416,8 +416,11 @@ code {
 }
 
 /* Snap Container */
-.snap-container {
+html {
   scroll-snap-type: y mandatory;
+}
+
+.snap-container {
   padding-top: 64px;
 }
 
