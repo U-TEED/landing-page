@@ -508,6 +508,11 @@ code {
     margin-top: 1.5rem;
   }
   
+  .marquee-container::before,
+  .marquee-container::after {
+    display: none;
+  }
+  
   .marquee-track {
     gap: 1.5rem;
   }
