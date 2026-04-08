@@ -170,14 +170,19 @@ code {
   font-weight: 600;
   color: #222;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
   font-family: 'Paperlogy', 'Pretendard', sans-serif;
   text-align: left;
 }
 
 .header-dropdown-menu button:hover {
-  background: rgba(0,0,0,0.05);
+  background: #222;
+  color: #fff;
   text-decoration: none;
+}
+
+.header-dropdown-menu button:hover .dropdown-desc {
+  color: rgba(255,255,255,0.7);
 }
 
 .dropdown-desc {
@@ -185,6 +190,7 @@ code {
   font-weight: 400;
   color: #888;
   margin-top: 0.2rem;
+  transition: color 0.15s;
 }
 
 .header-cta {
