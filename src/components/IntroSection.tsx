@@ -144,8 +144,10 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
                 <Image
                   src={img.src}
                   alt={img.name}
-                  width={120}
-                  height={60}
+                  width={240}
+                  height={120}
+                  quality={100}
+                  unoptimized
                   className="marquee-image school-logo"
                 />
               </div>
