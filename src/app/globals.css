@@ -263,6 +263,11 @@ code {
   background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
 }
 
+.intro-slide.intro-school {
+  padding: 64px 2rem 60px;
+  background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+}
+
 .intro-phrase {
   text-align: center;
   opacity: 0;
@@ -391,10 +396,10 @@ code {
 .marquee-container {
   width: 100vw;
   overflow: hidden;
-  margin-top: 3rem;
-  position: absolute;
-  left: 0;
-  bottom: 120px;
+  margin-top: 2rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .marquee-container::before,

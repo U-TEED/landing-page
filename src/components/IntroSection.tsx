@@ -62,7 +62,7 @@ function CountUp({ target, suffix, start }: { target: number; suffix: string; st
 }
 
 export default function IntroSection({ sectionRef }: IntroSectionProps) {
-  const [visibleSlides, setVisibleSlides] = useState<boolean[]>(new Array(phrases.length + 1).fill(false));
+  const [visibleSlides, setVisibleSlides] = useState<boolean[]>(new Array(phrases.length + 2).fill(false));
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -90,6 +90,9 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
     return () => observers.forEach(obs => obs.disconnect());
   }, []);
 
+  const aboutIndex = phrases.length;
+  const schoolIndex = phrases.length + 1;
+
   return (
     <div ref={sectionRef as RefObject<HTMLDivElement>} className="intro-wrapper" id="intro">
       {phrases.map((phrase, i) => (
@@ -109,10 +112,10 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
       ))}
       
       <div
-        ref={el => { slideRefs.current[phrases.length] = el; }}
+        ref={el => { slideRefs.current[aboutIndex] = el; }}
         className="intro-slide intro-about"
       >
-        <div className={`intro-content ${visibleSlides[phrases.length] ? 'visible' : ''}`}>
+        <div className={`intro-content ${visibleSlides[aboutIndex] ? 'visible' : ''}`}>
           <span className="intro-eyebrow">About U-TEED</span>
           <h1 className="intro-title">
             기술로 일상의 문제를<br />
@@ -129,13 +132,33 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
                   <CountUp 
                     target={stat.target} 
                     suffix={stat.suffix} 
-                    start={visibleSlides[phrases.length]} 
+                    start={visibleSlides[aboutIndex]} 
                   />
                 </span>
                 <span className="stat-label">{stat.label}</span>
               </div>
             ))}
           </div>
+        </div>
+        <div className="intro-scroll-indicator">
+          <div className="scroll-arrow">↓</div>
+        </div>
+      </div>
+
+      <div
+        ref={el => { slideRefs.current[schoolIndex] = el; }}
+        className="intro-slide intro-school"
+      >
+        <div className={`intro-content ${visibleSlides[schoolIndex] ? 'visible' : ''}`}>
+          <span className="intro-eyebrow">Our Team</span>
+          <h1 className="intro-title">
+            학교는 모두 달라도<br />
+            같은 사명으로 모였습니다
+          </h1>
+          <p className="intro-description">
+            더 나은 사회를 위한 서비스를 만든다는 사명 아래,<br />
+            다양한 배경의 팀원들이 함께합니다.
+          </p>
         </div>
         <div className="marquee-container">
           <div className="marquee-track">
