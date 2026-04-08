@@ -248,7 +248,7 @@ code {
 }
 
 .intro-slide {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -394,12 +394,16 @@ code {
 
 /* Marquee Banner */
 .marquee-container {
-  width: 100vw;
+  /* intro-slide에 좌우 padding(2rem)이 있어서 마퀴가 가운데에 뜨며 좌우 흰 여백이 생깁니다. */
+  /* 마퀴만 부모 padding을 상쇄해서 뷰포트 가장자리까지 늘립니다. */
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
   overflow: hidden;
   margin-top: 2rem;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: none;
 }
 
 .marquee-container::before,
@@ -411,6 +415,8 @@ code {
   width: 50px;
   z-index: 2;
   pointer-events: none;
+  /* 좌/우 페이드 오버레이 자체가 흰 여백처럼 보일 수 있어서 강제로 제거 */
+  display: none;
 }
 
 .marquee-container::before {
@@ -420,7 +426,7 @@ code {
 
 .marquee-container::after {
   right: 0;
-  background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+  /* (display:none은 상위 선언에서 처리) */
 }
 
 
