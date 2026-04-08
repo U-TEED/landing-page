@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
 import Header from '@/components/Header';
+import IntroSection from '@/components/IntroSection';
 import ParallaxSection from '@/components/ParallaxSection';
 import FooterSection from '@/components/FooterSection';
 import SurveyPopup from '@/components/SurveyPopup';
@@ -24,7 +25,7 @@ const sections: Section[] = [
   },
 ];
 
-function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElement | null>[] }) {
+function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<HTMLElement | null>[], introRef: MutableRefObject<HTMLElement | null> }) {
   const [scrollY, setScrollY] = useState(0);
   const [footerInView, setFooterInView] = useState(false);
   const [showSurveyPopup, setShowSurveyPopup] = useState(false);
@@ -32,7 +33,6 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // 하루 동안 보지 않기 체크 여부 확인
     try {
       const hideUntilStr = window.localStorage.getItem('surveyPopupHideUntil') || '0';
       const hideUntil = parseInt(hideUntilStr, 10);
@@ -42,7 +42,6 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
     } catch {
       // ignore storage errors
     }
-    // 페이지 로딩 후 1초 뒤에 팝업 표시
     const timer = setTimeout(() => {
       setShowSurveyPopup(true);
     }, 1000);
@@ -71,6 +70,7 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
   return (
     <div className="App snap-container">
       <SurveyPopup isOpen={showSurveyPopup} onClose={closeSurveyPopup} />
+      <IntroSection sectionRef={introRef} />
       {sections.map((sec, i) => (
         <ParallaxSection
           key={i}
@@ -87,6 +87,7 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
 }
 
 export default function Home() {
+  const introRef = useRef<HTMLElement | null>(null);
   const sectionRefs = [
     useRef<HTMLElement | null>(null),
     useRef<HTMLElement | null>(null),
@@ -95,6 +96,10 @@ export default function Home() {
   const handleNavClick = (id: string) => {
     if (id === 'contact') {
       document.querySelector('.footer-section')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    if (id === 'intro') {
+      introRef?.current?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
     if (id === 'service') {
@@ -107,7 +112,7 @@ export default function Home() {
   return (
     <>
       <Header onNavClick={handleNavClick} />
-      <MainContent sectionRefs={sectionRefs} />
+      <MainContent sectionRefs={sectionRefs} introRef={introRef} />
     </>
   );
 }
