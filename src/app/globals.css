@@ -414,12 +414,12 @@ code {
 }
 
 .marquee-container::before {
-  left: 0;
+  left: -1px;
   background: linear-gradient(to right, #fff, transparent);
 }
 
 .marquee-container::after {
-  right: 0;
+  right: -1px;
   background: linear-gradient(to left, #fff, transparent);
 }
 
