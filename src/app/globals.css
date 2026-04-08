@@ -435,8 +435,15 @@ code {
   border-radius: 50%;
   object-fit: cover;
   filter: grayscale(100%);
-  opacity: 0.7;
+  opacity: 0.5;
   transition: filter 0.3s, opacity 0.3s;
+}
+
+.marquee-image.school-logo {
+  width: 120px;
+  height: 60px;
+  border-radius: 0;
+  object-fit: contain;
 }
 
 .marquee-image:hover {

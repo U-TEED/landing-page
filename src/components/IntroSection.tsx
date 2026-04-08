@@ -18,17 +18,11 @@ const stats = [
   { target: 2024, suffix: '', label: '설립년도' },
 ];
 
-const teamImages = [
-  { src: '/images/team/김재윤.png', name: '김재윤' },
-  { src: '/images/team/김명준.png', name: '김명준' },
-  { src: '/images/team/김진영.png', name: '김진영' },
-  { src: '/images/team/박규원.png', name: '박규원' },
-  { src: '/images/team/박혜원.png', name: '박혜원' },
-  { src: '/images/team/윤효빈.png', name: '윤효빈' },
-  { src: '/images/team/임태호.png', name: '임태호' },
-  { src: '/images/team/정민규.png', name: '정민규' },
-  { src: '/images/team/최수진.png', name: '최수진' },
-  { src: '/images/team/홍예찬.png', name: '홍예찬' },
+const schoolImages = [
+  { src: '/images/school/yonsei.png', name: '연세대학교' },
+  { src: '/images/school/korea.png', name: '고려대학교' },
+  { src: '/images/school/kyunghee.png', name: '경희대학교' },
+  { src: '/images/school/hongik.png', name: '홍익대학교' },
 ];
 
 function CountUp({ target, suffix, start }: { target: number; suffix: string; start: boolean }) {
@@ -145,14 +139,14 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
         </div>
         <div className="marquee-container">
           <div className="marquee-track">
-            {[...teamImages, ...teamImages].map((img, i) => (
+            {[...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages].map((img, i) => (
               <div key={i} className="marquee-item">
                 <Image
                   src={img.src}
                   alt={img.name}
-                  width={80}
-                  height={80}
-                  className="marquee-image"
+                  width={120}
+                  height={60}
+                  className="marquee-image school-logo"
                 />
               </div>
             ))}
