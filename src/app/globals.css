@@ -268,14 +268,37 @@ code {
   transform: translateY(0);
 }
 
-.intro-eyebrow {
-  display: inline-block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #666;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
+.catchphrase-container {
+  position: relative;
+  height: 5rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.catchphrase-text {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.catchphrase-text.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.catchphrase-main {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #000;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .intro-title {
@@ -353,6 +376,15 @@ code {
 }
 
 @media (max-width: 768px) {
+  .catchphrase-container {
+    height: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .catchphrase-main {
+    font-size: 2.2rem;
+  }
+  
   .intro-title {
     font-size: 2.2rem;
   }

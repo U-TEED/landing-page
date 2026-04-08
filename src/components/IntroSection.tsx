@@ -8,6 +8,7 @@ interface IntroSectionProps {
 
 export default function IntroSection({ sectionRef }: IntroSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,6 +27,22 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
     return () => observer.disconnect();
   }, [sectionRef]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const sectionHeight = sectionRef.current.offsetHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / (sectionHeight * 0.5)));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [sectionRef]);
+
+  const showSecondPhrase = scrollProgress > 0.5;
+
   return (
     <section 
       ref={sectionRef as RefObject<HTMLElement>}
@@ -33,14 +50,17 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
       id="intro"
     >
       <div className={`intro-content ${isVisible ? 'visible' : ''}`}>
-        <span className="intro-eyebrow">About U-TEED</span>
-        <h1 className="intro-title">
-          기술로 일상의 문제를<br />
-          해결합니다
-        </h1>
+        <div className="catchphrase-container">
+          <div className={`catchphrase-text ${!showSecondPhrase ? 'active' : ''}`}>
+            <span className="catchphrase-main">Fast to Act.</span>
+          </div>
+          <div className={`catchphrase-text ${showSecondPhrase ? 'active' : ''}`}>
+            <span className="catchphrase-main">Smart in Action.</span>
+          </div>
+        </div>
         <p className="intro-description">
-          U-TEED는 사람들의 일상 속 불편함을 기술로 해결하는 팀입니다.<br />
-          스포츠, 헬스케어 등 다양한 영역에서 실질적인 가치를 만들어갑니다.
+          U-TEED는 빠른 실행력과 스마트한 기술로<br />
+          일상의 문제를 해결합니다.
         </p>
         <div className="intro-stats">
           <div className="intro-stat">
