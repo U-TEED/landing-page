@@ -428,6 +428,7 @@ code {
   gap: 3rem;
   animation: marquee 40s linear infinite;
   width: max-content;
+  padding-left: 100%;
 }
 
 .marquee-item {
