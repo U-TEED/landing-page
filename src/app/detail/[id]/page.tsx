@@ -1,15 +1,14 @@
 'use client';
 
-import { use } from 'react';
 import SitePage from './SitePage';
 import BeepBeepPage from './BeepBeepPage';
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function DetailPage({ params }: PageProps) {
-  const { id } = use(params);
+  const { id } = params;
 
   if (id === '2') {
     return <BeepBeepPage />;
