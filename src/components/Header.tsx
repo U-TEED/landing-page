@@ -57,14 +57,16 @@ export default function Header({ onNavClick }: HeaderProps) {
               <button className="header-dropdown-btn">서비스</button>
               {showDropdown && (
                 <div className="header-dropdown-menu">
-                  <button onClick={() => { router.push('/detail/1'); setShowDropdown(false); }}>
-                    SITE
-                    <span className="dropdown-desc">픽업게임 운영 플랫폼</span>
-                  </button>
-                  <button onClick={() => { router.push('/detail/2'); setShowDropdown(false); }}>
-                    BeepBeep
-                    <span className="dropdown-desc">경도인지장애 조기 발견</span>
-                  </button>
+                  <div className="header-dropdown-menu-inner">
+                    <button onClick={() => { router.push('/detail/1'); setShowDropdown(false); }}>
+                      SITE
+                      <span className="dropdown-desc">픽업게임 운영 플랫폼</span>
+                    </button>
+                    <button onClick={() => { router.push('/detail/2'); setShowDropdown(false); }}>
+                      BeepBeep
+                      <span className="dropdown-desc">경도인지장애 조기 발견</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
