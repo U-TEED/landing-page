@@ -139,7 +139,7 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
         </div>
         <div className="marquee-container">
           <div className="marquee-track">
-            {[...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages].map((img, i) => (
+            {[...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages, ...schoolImages].map((img, i) => (
               <div key={i} className="marquee-item">
                 <Image
                   src={img.src}

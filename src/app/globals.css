@@ -420,8 +420,8 @@ code {
 
 .marquee-track {
   display: flex;
-  gap: 2rem;
-  animation: marquee 30s linear infinite;
+  gap: 3rem;
+  animation: marquee 40s linear infinite;
   width: max-content;
 }
 
