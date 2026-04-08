@@ -243,16 +243,50 @@ code {
 }
 
 /* Intro Section */
-.intro-section {
+.intro-wrapper {
+  width: 100%;
+}
+
+.intro-slide {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 120px 2rem 60px;
-  background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+  background: #000;
   position: relative;
   scroll-snap-align: start;
+}
+
+.intro-slide.intro-about {
+  background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+}
+
+.intro-phrase {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.intro-phrase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.phrase-text {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -2px;
+  margin-bottom: 1rem;
+}
+
+.phrase-sub {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
 }
 
 .intro-content {
@@ -268,37 +302,14 @@ code {
   transform: translateY(0);
 }
 
-.catchphrase-container {
-  position: relative;
-  height: 5rem;
-  margin-bottom: 2rem;
-  overflow: hidden;
-}
-
-.catchphrase-text {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.catchphrase-text.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.catchphrase-main {
-  font-size: 4rem;
-  font-weight: 900;
-  color: #000;
-  letter-spacing: -2px;
-  background: linear-gradient(135deg, #000 0%, #333 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.intro-eyebrow {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
 }
 
 .intro-title {
@@ -358,6 +369,14 @@ code {
   color: #888;
 }
 
+.intro-slide:not(.intro-about) .intro-scroll-indicator {
+  opacity: 0.4;
+}
+
+.intro-slide:not(.intro-about) .scroll-arrow {
+  color: rgba(255,255,255,0.6);
+}
+
 .scroll-arrow {
   font-size: 1.2rem;
   color: #888;
@@ -376,13 +395,12 @@ code {
 }
 
 @media (max-width: 768px) {
-  .catchphrase-container {
-    height: 3.5rem;
-    margin-bottom: 1.5rem;
+  .phrase-text {
+    font-size: 2.8rem;
   }
   
-  .catchphrase-main {
-    font-size: 2.2rem;
+  .phrase-sub {
+    font-size: 1.1rem;
   }
   
   .intro-title {
