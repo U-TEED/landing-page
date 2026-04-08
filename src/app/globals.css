@@ -392,7 +392,9 @@ code {
   width: 100vw;
   overflow: hidden;
   margin-top: 3rem;
-  position: relative;
+  position: absolute;
+  left: 0;
+  bottom: 120px;
 }
 
 .marquee-container::before,

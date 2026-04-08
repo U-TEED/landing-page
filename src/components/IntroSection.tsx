@@ -142,20 +142,20 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
               </div>
             ))}
           </div>
-          <div className="marquee-container">
-            <div className="marquee-track">
-              {[...teamImages, ...teamImages].map((img, i) => (
-                <div key={i} className="marquee-item">
-                  <Image
-                    src={img.src}
-                    alt={img.name}
-                    width={80}
-                    height={80}
-                    className="marquee-image"
-                  />
-                </div>
-              ))}
-            </div>
+        </div>
+        <div className="marquee-container">
+          <div className="marquee-track">
+            {[...teamImages, ...teamImages].map((img, i) => (
+              <div key={i} className="marquee-item">
+                <Image
+                  src={img.src}
+                  alt={img.name}
+                  width={80}
+                  height={80}
+                  className="marquee-image"
+                />
+              </div>
+            ))}
           </div>
         </div>
         <div className="intro-scroll-indicator">
