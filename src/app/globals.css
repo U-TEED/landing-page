@@ -515,6 +515,16 @@ code {
   
   .marquee-track {
     gap: 1.5rem;
+    animation: marquee-mobile 40s linear infinite;
+  }
+}
+
+@keyframes marquee-mobile {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 
