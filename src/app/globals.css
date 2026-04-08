@@ -463,7 +463,7 @@ code {
 
 .marquee-track {
   display: flex;
-  gap: 1rem;
+  gap: 0;
   animation: marquee 60s linear infinite;
   width: max-content;
 }
@@ -473,7 +473,9 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 180px;
+  width: 200px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .marquee-image {
@@ -484,15 +486,15 @@ code {
 }
 
 .marquee-image.school-logo {
-  width: 160px;
-  height: 60px;
+  width: 150px;
+  height: 50px;
   border-radius: 0;
   object-fit: contain;
 }
 
 .marquee-image.school-logo.yonsei {
-  width: 170px;
-  height: 65px;
+  width: 150px;
+  height: 50px;
 }
 
 @keyframes marquee {
