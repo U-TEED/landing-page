@@ -473,8 +473,8 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  padding: 0 10px;
+  width: 220px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -493,8 +493,8 @@ code {
 }
 
 .marquee-image.school-logo.yonsei {
-  width: 150px;
-  height: 50px;
+  width: 200px;
+  height: 70px;
 }
 
 @keyframes marquee {
