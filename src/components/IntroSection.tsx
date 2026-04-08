@@ -26,22 +26,28 @@ function CountUp({ target, suffix, start }: { target: number; suffix: string; st
     hasAnimated.current = true;
 
     const duration = 1500;
-    const steps = 60;
-    const increment = target / steps;
-    const stepTime = duration / steps;
-    let current = 0;
+    const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
+    const easeOutQuart = (t: number): number => {
+      return 1 - Math.pow(1 - t, 4);
+    };
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutQuart(progress);
+      const currentCount = Math.floor(easedProgress * target);
+
+      setCount(currentCount);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
       } else {
-        setCount(Math.floor(current));
+        setCount(target);
       }
-    }, stepTime);
+    };
 
-    return () => clearInterval(timer);
+    requestAnimationFrame(animate);
   }, [start, target]);
 
   return <>{count}{suffix}</>;
