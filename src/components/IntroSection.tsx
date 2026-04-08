@@ -19,8 +19,8 @@ const stats = [
 ];
 
 const schoolImages = [
-  { src: '/images/school/yonsei.png', name: '연세대학교' },
   { src: '/images/school/korea.png', name: '고려대학교' },
+  { src: '/images/school/yonsei.png', name: '연세대학교' },
   { src: '/images/school/kyunghee.png', name: '경희대학교' },
   { src: '/images/school/hongik.png', name: '홍익대학교' },
 ];
