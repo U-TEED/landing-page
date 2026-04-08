@@ -15,7 +15,7 @@ const phrases = [
 const stats = [
   { target: 2, suffix: '+', label: '서비스 운영 중' },
   { target: 6, suffix: '+', label: '팀원' },
-  { target: 2024, suffix: '', label: '설립년도' },
+  { target: 2025, suffix: '', label: '설립년도' },
 ];
 
 const schoolImages = [
