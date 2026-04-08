@@ -96,7 +96,7 @@ const siteTeamGroups = [
 
 const beepbeepTeamGroups = [
   {
-    category: '기획 / 마케팅',
+    category: '기획',
     members: [
       {
         name: '임태호',
@@ -113,14 +113,6 @@ const beepbeepTeamGroups = [
         school: '연세대학교',
         major: '불어불문학과',
         profileImage: '/images/team/박규원.png',
-      },
-      {
-        name: '홍예찬',
-        role: '마케팅',
-        desc: '마케팅 전략 및 커뮤니티 운영',
-        school: '연세대학교',
-        major: '물리학과',
-        profileImage: '/images/team/홍예찬.png',
       },
     ],
   },
@@ -147,24 +139,7 @@ const beepbeepTeamGroups = [
   },
   {
     category: '디자인',
-    members: [
-      {
-        name: '최수진',
-        role: 'UI/UX',
-        desc: 'UI/UX 디자인',
-        school: '홍익대학교',
-        major: '시각디자인학과',
-        profileImage: '/images/team/최수진.png',
-      },
-      {
-        name: '박혜원',
-        role: 'SNS 마케팅',
-        desc: 'SNS 마케팅 자료 제작',
-        school: '경희대학교',
-        major: '시각디자인학과',
-        profileImage: '/images/team/박혜원.png',
-      },
-    ],
+    members: [],
   },
 ];
 
@@ -259,11 +234,103 @@ export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSe
               </div>
             </div>
 
+            {design.members.length > 0 ? (
+              <div className={styles.teamGroup}>
+                <h3 className={styles.teamCategoryTitle}>{design.category}</h3>
+                <div className={`${styles.teamGrid} ${styles.teamGridTwo}`}>
+                  {design.members.map((member, index) => (
+                    <div key={index} className={`${styles.teamCard} ${styles.reveal}`}>
+                      <div
+                        className={`${styles.teamAvatar} ${
+                          member.profileImage ? styles.teamAvatarWithImage : ''
+                        }`}
+                      >
+                        {member.profileImage ? (
+                          <Image
+                            src={member.profileImage}
+                            alt={`${member.name} 프로필`}
+                            width={200}
+                            height={200}
+                            quality={100}
+                            unoptimized
+                            className={styles.teamAvatarImg}
+                          />
+                        ) : (
+                          member.name.charAt(0)
+                        )}
+                      </div>
+                      <div className={styles.teamInfo}>
+                        <b className={styles.teamName}>{member.name}</b>
+                        <span className={styles.teamRole}>{member.role}</span>
+                      </div>
+                      <p className={styles.teamDesc}>{member.desc}</p>
+                      <div className={styles.teamSchool}>
+                        <span className={styles.schoolName}>{member.school}</span>
+                        <span className={styles.majorName}>{member.major}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className={styles.teamGroup}>
+                <h3 className={styles.teamCategoryTitle}>{development.category}</h3>
+                <div className={`${styles.teamGrid} ${styles.teamGridTwo}`}>
+                  {development.members.map((member, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.teamCard} ${styles.reveal} ${
+                        member.inactive ? styles.teamCardInactive : ''
+                      }`}
+                      data-inactive-reason={member.inactive ? member.inactiveReason : undefined}
+                    >
+                      <div
+                        className={`${styles.teamAvatar} ${
+                          member.profileImage ? styles.teamAvatarWithImage : ''
+                        }`}
+                      >
+                        {member.profileImage ? (
+                          <Image
+                            src={member.profileImage}
+                            alt={`${member.name} 프로필`}
+                            width={200}
+                            height={200}
+                            quality={100}
+                            unoptimized
+                            className={styles.teamAvatarImg}
+                          />
+                        ) : (
+                          member.name.charAt(0)
+                        )}
+                      </div>
+                      <div className={styles.teamInfo}>
+                        <b className={styles.teamName}>{member.name}</b>
+                        <span className={styles.teamRole}>{member.role}</span>
+                      </div>
+                      <p className={styles.teamDesc}>{member.desc}</p>
+                      <div className={styles.teamSchool}>
+                        <span className={styles.schoolName}>{member.school}</span>
+                        <span className={styles.majorName}>{member.major}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {design.members.length > 0 && (
             <div className={styles.teamGroup}>
-              <h3 className={styles.teamCategoryTitle}>{design.category}</h3>
-              <div className={`${styles.teamGrid} ${styles.teamGridTwo}`}>
-                {design.members.map((member, index) => (
-                  <div key={index} className={`${styles.teamCard} ${styles.reveal}`}>
+              <h3 className={styles.teamCategoryTitle}>{development.category}</h3>
+              <div className={styles.teamGrid}>
+                {development.members.map((member, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.teamCard} ${styles.reveal} ${
+                      member.inactive ? styles.teamCardInactive : ''
+                    }`}
+                    data-inactive-reason={member.inactive ? member.inactiveReason : undefined}
+                  >
                     <div
                       className={`${styles.teamAvatar} ${
                         member.profileImage ? styles.teamAvatarWithImage : ''
@@ -296,51 +363,7 @@ export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSe
                 ))}
               </div>
             </div>
-          </div>
-
-          <div className={styles.teamGroup}>
-            <h3 className={styles.teamCategoryTitle}>{development.category}</h3>
-            <div className={styles.teamGrid}>
-              {development.members.map((member, index) => (
-                <div
-                  key={index}
-                  className={`${styles.teamCard} ${styles.reveal} ${
-                    member.inactive ? styles.teamCardInactive : ''
-                  }`}
-                  data-inactive-reason={member.inactive ? member.inactiveReason : undefined}
-                >
-                  <div
-                    className={`${styles.teamAvatar} ${
-                      member.profileImage ? styles.teamAvatarWithImage : ''
-                    }`}
-                  >
-                    {member.profileImage ? (
-                      <Image
-                        src={member.profileImage}
-                        alt={`${member.name} 프로필`}
-                        width={200}
-                        height={200}
-                        quality={100}
-                        unoptimized
-                        className={styles.teamAvatarImg}
-                      />
-                    ) : (
-                      member.name.charAt(0)
-                    )}
-                  </div>
-                  <div className={styles.teamInfo}>
-                    <b className={styles.teamName}>{member.name}</b>
-                    <span className={styles.teamRole}>{member.role}</span>
-                  </div>
-                  <p className={styles.teamDesc}>{member.desc}</p>
-                  <div className={styles.teamSchool}>
-                    <span className={styles.schoolName}>{member.school}</span>
-                    <span className={styles.majorName}>{member.major}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
