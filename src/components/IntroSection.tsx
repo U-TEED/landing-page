@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef, RefObject } from 'react';
+import Image from 'next/image';
 
 interface IntroSectionProps {
   sectionRef: RefObject<HTMLElement | null>;
@@ -15,6 +16,19 @@ const stats = [
   { target: 2, suffix: '+', label: '서비스 운영 중' },
   { target: 6, suffix: '+', label: '팀원' },
   { target: 2024, suffix: '', label: '설립년도' },
+];
+
+const teamImages = [
+  { src: '/images/team/김재윤.png', name: '김재윤' },
+  { src: '/images/team/김명준.png', name: '김명준' },
+  { src: '/images/team/김진영.png', name: '김진영' },
+  { src: '/images/team/박규원.png', name: '박규원' },
+  { src: '/images/team/박혜원.png', name: '박혜원' },
+  { src: '/images/team/윤효빈.png', name: '윤효빈' },
+  { src: '/images/team/임태호.png', name: '임태호' },
+  { src: '/images/team/정민규.png', name: '정민규' },
+  { src: '/images/team/최수진.png', name: '최수진' },
+  { src: '/images/team/홍예찬.png', name: '홍예찬' },
 ];
 
 function CountUp({ target, suffix, start }: { target: number; suffix: string; start: boolean }) {
@@ -127,6 +141,21 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
                 <span className="stat-label">{stat.label}</span>
               </div>
             ))}
+          </div>
+          <div className="marquee-container">
+            <div className="marquee-track">
+              {[...teamImages, ...teamImages].map((img, i) => (
+                <div key={i} className="marquee-item">
+                  <Image
+                    src={img.src}
+                    alt={img.name}
+                    width={80}
+                    height={80}
+                    className="marquee-image"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="intro-scroll-indicator">

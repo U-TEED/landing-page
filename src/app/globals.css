@@ -387,6 +387,70 @@ code {
   }
 }
 
+/* Marquee Banner */
+.marquee-container {
+  width: 100vw;
+  overflow: hidden;
+  margin-top: 3rem;
+  position: relative;
+}
+
+.marquee-container::before,
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, #fff, transparent);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, #fff, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+}
+
+.marquee-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.marquee-image:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 768px) {
   .phrase-text {
     font-size: 2.8rem;
@@ -410,6 +474,11 @@ code {
   
   .stat-number {
     font-size: 2rem;
+  }
+  
+  .marquee-image {
+    width: 60px;
+    height: 60px;
   }
 }
 
