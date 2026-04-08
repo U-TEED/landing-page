@@ -260,12 +260,12 @@ code {
 
 .intro-slide.intro-about {
   padding: 64px 2rem 60px;
-  background: linear-gradient(180deg, #fff 0%, #f8f9fa 100%);
+  background: #fff;
 }
 
 .intro-slide.intro-school {
   padding: 64px 2rem 60px;
-  background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+  background: #fff;
 }
 
 .intro-phrase {
