@@ -235,9 +235,10 @@ export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSe
                         <Image
                           src={member.profileImage}
                           alt={`${member.name} 프로필`}
-                          width={64}
-                          height={64}
+                          width={200}
+                          height={200}
                           quality={100}
+                          unoptimized
                           className={styles.teamAvatarImg}
                         />
                       ) : (
@@ -272,9 +273,10 @@ export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSe
                         <Image
                           src={member.profileImage}
                           alt={`${member.name} 프로필`}
-                          width={64}
-                          height={64}
+                          width={200}
+                          height={200}
                           quality={100}
+                          unoptimized
                           className={styles.teamAvatarImg}
                         />
                       ) : (
@@ -316,9 +318,10 @@ export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSe
                       <Image
                         src={member.profileImage}
                         alt={`${member.name} 프로필`}
-                        width={64}
-                        height={64}
+                        width={200}
+                        height={200}
                         quality={100}
+                        unoptimized
                         className={styles.teamAvatarImg}
                       />
                     ) : (
