@@ -11,6 +11,42 @@ const phrases = [
   { text: 'Smart in Action.', sub: '똑똑하게 실행합니다' },
 ];
 
+const stats = [
+  { target: 2, suffix: '+', label: '서비스 운영 중' },
+  { target: 6, suffix: '+', label: '팀원' },
+  { target: 2024, suffix: '', label: '설립년도' },
+];
+
+function CountUp({ target, suffix, start }: { target: number; suffix: string; start: boolean }) {
+  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!start || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    const duration = 1500;
+    const steps = 60;
+    const increment = target / steps;
+    const stepTime = duration / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [start, target]);
+
+  return <>{count}{suffix}</>;
+}
+
 export default function IntroSection({ sectionRef }: IntroSectionProps) {
   const [visibleSlides, setVisibleSlides] = useState<boolean[]>(new Array(phrases.length + 1).fill(false));
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -73,18 +109,18 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
             스포츠, 헬스케어 등 다양한 영역에서 실질적인 가치를 만들어갑니다.
           </p>
           <div className="intro-stats">
-            <div className="intro-stat">
-              <span className="stat-number">2+</span>
-              <span className="stat-label">서비스 운영 중</span>
-            </div>
-            <div className="intro-stat">
-              <span className="stat-number">6+</span>
-              <span className="stat-label">팀원</span>
-            </div>
-            <div className="intro-stat">
-              <span className="stat-number">2024</span>
-              <span className="stat-label">설립년도</span>
-            </div>
+            {stats.map((stat, i) => (
+              <div key={i} className="intro-stat">
+                <span className="stat-number">
+                  <CountUp 
+                    target={stat.target} 
+                    suffix={stat.suffix} 
+                    start={visibleSlides[phrases.length]} 
+                  />
+                </span>
+                <span className="stat-label">{stat.label}</span>
+              </div>
+            ))}
           </div>
         </div>
         <div className="intro-scroll-indicator">
