@@ -493,6 +493,24 @@ code {
     width: 60px;
     height: 60px;
   }
+  
+  .marquee-image.school-logo {
+    width: 100px;
+    height: 50px;
+  }
+  
+  .marquee-image.school-logo.yonsei {
+    width: 120px;
+    height: 60px;
+  }
+  
+  .marquee-container {
+    margin-top: 1.5rem;
+  }
+  
+  .marquee-track {
+    gap: 1.5rem;
+  }
 }
 
 /* Snap Container */
