@@ -10,18 +10,18 @@ import { Section } from '@/types';
 
 const sections: Section[] = [
   {
-    title: 'Your Game, Our SITE',
-    highlight: 'SITE',
-    hashtag: '#농구_픽업게임을_앱에서_손쉽게 #농구_대회_찾을_때는_SITE',
-    image: null,
-    detailLink: '/detail/1',
-  },
-  {
     title: 'AI 음성 통화 기반 경도인지장애 케어',
     highlight: 'BeepBeep',
     hashtag: '#고령_부모님의_인지기능_관리 #AI_음성_모니터링',
     image: null,
     detailLink: '/detail/2',
+  },
+  {
+    title: 'Your Game, Our SITE',
+    highlight: 'SITE',
+    hashtag: '#농구_픽업게임을_앱에서_손쉽게 #농구_대회_찾을_때는_SITE',
+    image: null,
+    detailLink: '/detail/1',
   },
 ];
 
@@ -30,6 +30,7 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
   const [footerInView, setFooterInView] = useState(false);
   const [showSurveyPopup, setShowSurveyPopup] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const footerRef = useRef<HTMLElement>(null!);
 
   const getAllSections = useCallback(() => {
@@ -47,7 +48,6 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
 
   const getCurrentSectionIndex = useCallback(() => {
     const allSections = getAllSections();
-    const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
     
     for (let i = 0; i < allSections.length; i++) {
@@ -109,10 +109,13 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
+    const onScroll = () => {
+      setScrollY(window.scrollY);
+      setCurrentSectionIndex(getCurrentSectionIndex());
+    };
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [getCurrentSectionIndex]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -127,9 +130,19 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
     setShowSurveyPopup(false);
   };
 
+  const totalSections = 4 + sections.length;
+
   return (
     <div className="App snap-container">
       <SurveyPopup isOpen={showSurveyPopup} onClose={closeSurveyPopup} />
+      <div className="side-indicator">
+        {Array.from({ length: totalSections }).map((_, i) => (
+          <div 
+            key={i} 
+            className={`indicator-dot ${currentSectionIndex === i ? 'active' : ''}`}
+          />
+        ))}
+      </div>
       <IntroSection sectionRef={introRef} />
       {sections.map((sec, i) => (
         <ParallaxSection
