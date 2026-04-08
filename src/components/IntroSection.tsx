@@ -105,9 +105,12 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
             <h1 className="phrase-text">{phrase.text}</h1>
             <p className="phrase-sub">{phrase.sub}</p>
           </div>
-          <div className="intro-scroll-indicator">
-            <div className="scroll-arrow">↓</div>
-          </div>
+          {i === 0 && (
+            <div className="intro-scroll-indicator">
+              <span>스크롤 하여 자세히 알아보기</span>
+              <div className="scroll-arrow">↓</div>
+            </div>
+          )}
         </div>
       ))}
       
@@ -139,9 +142,6 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
               </div>
             ))}
           </div>
-        </div>
-        <div className="intro-scroll-indicator">
-          <div className="scroll-arrow">↓</div>
         </div>
       </div>
 
@@ -176,10 +176,6 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
               </div>
             ))}
           </div>
-        </div>
-        <div className="intro-scroll-indicator">
-          <span>스크롤하여 서비스 보기</span>
-          <div className="scroll-arrow">↓</div>
         </div>
       </div>
     </div>

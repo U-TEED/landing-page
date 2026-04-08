@@ -360,24 +360,24 @@ code {
 
 .intro-scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  opacity: 0.6;
+  gap: 1rem;
   animation: bounce 2s infinite;
 }
 
 .intro-scroll-indicator span {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
 }
 
-
 .scroll-arrow {
-  font-size: 1.2rem;
-  color: #888;
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 300;
 }
 
 @keyframes bounce {
