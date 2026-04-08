@@ -20,7 +20,7 @@ const stats = [
 
 const schoolImages = [
   { src: '/images/school/korea.png', name: '고려대학교' },
-  { src: '/images/school/yonsei.png', name: '연세대학교' },
+  { src: '/images/school/yonsei.jpg', name: '연세대학교' },
   { src: '/images/school/kyunghee.png', name: '경희대학교' },
   { src: '/images/school/hongik.png', name: '홍익대학교' },
 ];
@@ -180,7 +180,7 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
                   height={120}
                   quality={100}
                   unoptimized
-                  className="marquee-image school-logo"
+                  className={`marquee-image school-logo ${img.name === '연세대학교' ? 'yonsei' : ''}`}
                 />
               </div>
             ))}

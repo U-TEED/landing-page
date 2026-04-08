@@ -448,6 +448,11 @@ code {
   object-fit: contain;
 }
 
+.marquee-image.school-logo.yonsei {
+  width: 200px;
+  height: 100px;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
