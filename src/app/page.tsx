@@ -16,9 +16,9 @@ const sections: Section[] = [
     detailLink: '/detail/1',
   },
   {
-    title: 'AI 음성 통화 기반 안부 케어',
+    title: 'AI 음성 통화 기반 경도인지장애 케어',
     highlight: 'BeepBeep',
-    hashtag: '#고령_부모님을_위한 #매일_자동_안부_통화',
+    hashtag: '#고령_부모님의_인지기능_관리 #AI_음성_모니터링',
     image: null,
     detailLink: '/detail/2',
   },

@@ -13,27 +13,27 @@ const serviceSections = [
   {
     id: 'service',
     eyebrow: '문제 정의',
-    title: '고령 부모님의 안부 확인, 매일 하기 어렵습니다.',
+    title: '경도인지장애, 조기 발견이 어렵습니다.',
     description:
-      '바쁜 일상 속에서 매일 전화하기 어렵고, 부모님도 자녀에게 부담 주기 싫어 연락을 자제합니다. 이상 징후를 늦게 발견하면 대응이 어려워집니다.',
+      '경도인지장애는 치매의 전 단계로, 일상에서 뚜렷한 증상이 없어 발견이 늦어지는 경우가 많습니다. 정기적인 인지기능 모니터링이 필요하지만, 매번 병원을 방문하기 어렵습니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '문제 정의 더 보기',
   },
   {
     id: 'service-call',
     eyebrow: '제품 개요',
-    title: 'AI가 보호자의 목소리로 매일 안부 전화를 드립니다.',
+    title: 'AI 음성 통화로 인지기능을 정기적으로 확인합니다.',
     description:
-      '보호자가 등록한 목소리를 학습해 자연스러운 AI 음성 통화를 진행합니다. 복약·식사·컨디션을 확인하고, 이상 징후 감지 시 즉시 알림을 전송합니다.',
+      '보호자가 등록한 목소리를 학습한 AI가 매일 자연스러운 통화를 진행합니다. 대화 중 기억력, 언어 능력, 시간 지남력 등을 분석해 인지기능 변화를 조기에 감지합니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '제품 흐름 보기',
   },
   {
     id: 'service-feature',
     eyebrow: '주요 기능',
-    title: '상태 모니터링부터 알림까지, 케어의 모든 흐름을 통합합니다.',
+    title: '인지기능 추적부터 알림까지, 케어의 모든 흐름을 통합합니다.',
     description:
-      '날짜별 상태 추적, 통화 시나리오 관리, 캘린더 뷰, 보호자·케어 파트너 관리까지. 한 곳에서 부모님의 건강 상태를 확인하고 관리할 수 있습니다.',
+      '날짜별 인지기능 점수 추적, 통화 시나리오 관리, 캘린더 뷰, 보호자·의료진 연계까지. 한 곳에서 부모님의 인지 건강 상태를 확인하고 관리할 수 있습니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '기능 더 보기',
   },
@@ -245,13 +245,13 @@ export default function BeepBeepPage() {
           <div className={`${styles.container} ${styles.heroGrid}`}>
             <div className={`${styles.heroContent} ${styles.reveal}`}>
               <h1 className={styles.heroTitle}>
-                AI 음성으로 매일 부모님 안부를 확인하는 서비스, BeepBeep.
+                AI 음성 통화로 경도인지장애를 조기에 발견하는 서비스, BeepBeep.
               </h1>
 
               <p className={styles.sub}>
-                보호자의 목소리를 학습한 AI가 매일 자동으로 전화를 드리고,
+                보호자의 목소리를 학습한 AI가 매일 자연스러운 대화를 나누고,
                 <br />
-                복약·식사·컨디션 이상 징후를 감지해 알림을 전송합니다.
+                인지기능 변화를 분석해 경도인지장애 징후를 조기에 감지합니다.
               </p>
 
               <div className={styles.ctaRow}>
@@ -386,9 +386,9 @@ export default function BeepBeepPage() {
               <p className={styles.eyebrow}>사업 현황</p>
               <h2 className={styles.h2}>현재 단계와 목표</h2>
               <p className={styles.lead}>
-                AI 음성 통화 기술을 검증하고 있으며,
+                AI 기반 인지기능 분석 기술을 검증하고 있으며,
                 <br />
-                초기 파일럿 파트너와 함께 서비스를 고도화하고 있습니다.
+                초기 파일럿 파트너와 함께 정확도를 높이고 있습니다.
               </p>
 
               <div className={styles.ctaRow}>
@@ -411,9 +411,9 @@ export default function BeepBeepPage() {
               <p className={styles.eyebrow}>협력/파일럿</p>
               <h2 className={styles.h2}>파일럿 운영 및 파트너십</h2>
               <p className={styles.lead}>
-                요양원, 실버타운, 지역 복지센터와의 협업을 통해 실제 운영 흐름을 검증합니다.
+                병원, 요양원, 치매안심센터와의 협업을 통해 실제 운영 흐름을 검증합니다.
                 <br />
-                초기 파트너와 함께 AI 음성 품질과 케어 정책을 구체화할 예정입니다.
+                초기 파트너와 함께 인지기능 분석 정확도와 연계 정책을 구체화할 예정입니다.
               </p>
 
               <div className={styles.ctaRow}>

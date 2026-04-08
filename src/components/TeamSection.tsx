@@ -197,7 +197,7 @@ interface TeamSectionProps {
 
 const projectDescriptions = {
   site: 'SITE는 스포츠를 사랑하는 팀원들이 모여 만들고 있습니다. 각자의 전문성을 바탕으로 더 나은 스포츠 경험을 설계합니다.',
-  beepbeep: 'BeepBeep은 가족을 소중히 여기는 팀원들이 모여 만들고 있습니다. 각자의 전문성을 바탕으로 더 따뜻한 케어 경험을 설계합니다.',
+  beepbeep: 'BeepBeep은 가족의 건강을 소중히 여기는 팀원들이 모여 만들고 있습니다. 각자의 전문성을 바탕으로 경도인지장애 조기 발견 솔루션을 설계합니다.',
 };
 
 export default function TeamSection({ sectionRef, id, project = 'site' }: TeamSectionProps) {
