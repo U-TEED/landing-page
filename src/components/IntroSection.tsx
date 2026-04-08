@@ -27,11 +27,16 @@ const schoolImages = [
 
 function CountUp({ target, suffix, start }: { target: number; suffix: string; start: boolean }) {
   const [count, setCount] = useState(0);
-  const hasAnimated = useRef(false);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!start || hasAnimated.current) return;
-    hasAnimated.current = true;
+    if (!start) {
+      setCount(0);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      return;
+    }
 
     const duration = 1500;
     const startTime = performance.now();
@@ -49,13 +54,19 @@ function CountUp({ target, suffix, start }: { target: number; suffix: string; st
       setCount(currentCount);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationRef.current = requestAnimationFrame(animate);
       } else {
         setCount(target);
       }
     };
 
-    requestAnimationFrame(animate);
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, [start, target]);
 
   return <>{count}{suffix}</>;
@@ -72,13 +83,11 @@ export default function IntroSection({ sectionRef }: IntroSectionProps) {
       if (ref) {
         const observer = new IntersectionObserver(
           ([entry]) => {
-            if (entry.isIntersecting) {
-              setVisibleSlides(prev => {
-                const newState = [...prev];
-                newState[index] = true;
-                return newState;
-              });
-            }
+            setVisibleSlides(prev => {
+              const newState = [...prev];
+              newState[index] = entry.isIntersecting;
+              return newState;
+            });
           },
           { threshold: 0.5 }
         );
