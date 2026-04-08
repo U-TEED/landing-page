@@ -394,7 +394,7 @@ code {
 
 /* Marquee Banner */
 .marquee-container {
-  width: 100vw;
+  width: calc(100vw - 4rem);
   overflow: hidden;
   margin-top: 2rem;
   position: relative;
