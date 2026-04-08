@@ -495,7 +495,7 @@ code {
 .marquee-image.school-logo.yonsei {
   width: 200px;
   height: 70px;
-  margin-top: 12px;
+  margin-top: -8px;
 }
 
 @keyframes marquee {
