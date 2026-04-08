@@ -256,8 +256,6 @@ code {
   padding: 0 2rem;
   background: #fff;
   position: relative;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .intro-slide.intro-about {
@@ -416,10 +414,6 @@ code {
 }
 
 /* Snap Container */
-html {
-  scroll-snap-type: y mandatory;
-}
-
 .snap-container {
   padding-top: 64px;
 }
