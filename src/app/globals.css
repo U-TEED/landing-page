@@ -109,6 +109,84 @@ code {
   text-decoration: underline;
 }
 
+/* Header Dropdown */
+.header-dropdown {
+  position: relative;
+}
+
+.header-dropdown-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #222;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif;
+}
+
+.header-dropdown-btn:hover {
+  color: #000;
+}
+
+.header-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.8rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.5rem;
+  min-width: 200px;
+  z-index: 1001;
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.header-dropdown-menu button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif;
+  text-align: left;
+}
+
+.header-dropdown-menu button:hover {
+  background: rgba(0,0,0,0.05);
+  text-decoration: none;
+}
+
+.dropdown-desc {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
 .header-cta {
   display: flex;
   align-items: center;

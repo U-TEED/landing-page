@@ -1,18 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 interface HeaderProps {
   onNavClick: (id: string) => void;
 }
 
-const BETA_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSePB2wt08eZymrTUKA3ZDGZV5vu5DTVhDH9kOCsEcGan6TcEQ/viewform?pli=1';
-
 export default function Header({ onNavClick }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
   const isDetailPage = pathname?.startsWith('/detail');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogoClick = () => {
     if (pathname === '/') {
@@ -50,7 +49,25 @@ export default function Header({ onNavClick }: HeaderProps) {
           </>
         ) : (
           <nav className="header-nav">
-            <button onClick={() => onNavClick('service')}>서비스</button>
+            <div 
+              className="header-dropdown"
+              onMouseEnter={() => setShowDropdown(true)}
+              onMouseLeave={() => setShowDropdown(false)}
+            >
+              <button className="header-dropdown-btn">서비스</button>
+              {showDropdown && (
+                <div className="header-dropdown-menu">
+                  <button onClick={() => { router.push('/detail/1'); setShowDropdown(false); }}>
+                    SITE
+                    <span className="dropdown-desc">픽업게임 운영 플랫폼</span>
+                  </button>
+                  <button onClick={() => { router.push('/detail/2'); setShowDropdown(false); }}>
+                    BeepBeep
+                    <span className="dropdown-desc">경도인지장애 조기 발견</span>
+                  </button>
+                </div>
+              )}
+            </div>
             <button onClick={() => onNavClick('section-2')}>프로젝트 의뢰하기</button>
             <a
               className="header-nav-link"
