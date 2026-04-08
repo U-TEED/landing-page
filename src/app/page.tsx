@@ -5,16 +5,22 @@ import Header from '@/components/Header';
 import ParallaxSection from '@/components/ParallaxSection';
 import FooterSection from '@/components/FooterSection';
 import SurveyPopup from '@/components/SurveyPopup';
-import TeamSection from '@/components/TeamSection';
 import { Section } from '@/types';
 
 const sections: Section[] = [
   {
     title: 'Your Game, Our SITE',
     highlight: 'SITE',
-    hashtag: '#농구_픽업게임을_앱에서_손쉽게 #용품구매도_이젠_앱으로',
+    hashtag: '#농구_픽업게임을_앱에서_손쉽게 #농구_대회_찾을_때는_SITE',
     image: null,
     detailLink: '/detail/1',
+  },
+  {
+    title: 'AI 음성 통화 기반 안부 케어',
+    highlight: 'BeepBeep',
+    hashtag: '#고령_부모님을_위한 #매일_자동_안부_통화',
+    image: null,
+    detailLink: '/detail/2',
   },
 ];
 
@@ -75,7 +81,6 @@ function MainContent({ sectionRefs }: { sectionRefs: MutableRefObject<HTMLElemen
           id={i === 0 ? 'service' : `section-${i + 1}`}
         />
       ))}
-      <TeamSection sectionRef={sectionRefs[1]} id="partner" />
       <FooterSection visible={footerInView} footerRef={footerRef} />
     </div>
   );
@@ -88,20 +93,12 @@ export default function Home() {
   ];
 
   const handleNavClick = (id: string) => {
-    if (id === 'section-2') {
-      window.location.href = 'mailto:admin@u-teed.co.kr';
-      return;
-    }
-    if (id === 'section-3') {
-      sectionRefs[1]?.current?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
     if (id === 'contact') {
       document.querySelector('.footer-section')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
-    if (id === 'partner') {
-      sectionRefs[1]?.current?.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'service') {
+      sectionRefs[0]?.current?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
     sectionRefs[0]?.current?.scrollIntoView({ behavior: 'smooth' });

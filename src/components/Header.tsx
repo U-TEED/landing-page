@@ -50,9 +50,8 @@ export default function Header({ onNavClick }: HeaderProps) {
           </>
         ) : (
           <nav className="header-nav">
-            <button onClick={() => onNavClick('section-1')}>SITE</button>
+            <button onClick={() => onNavClick('service')}>서비스</button>
             <button onClick={() => onNavClick('section-2')}>프로젝트 의뢰하기</button>
-            <button onClick={() => onNavClick('section-3')}>팀 소개</button>
             <a
               className="header-nav-link"
               href="https://accounts.zoho.com/signin?servicename=VirtualOffice&signupurl=https://www.zoho.com/mail/zohomail-pricing.html&serviceurl=https://mail.zoho.com"

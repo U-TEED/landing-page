@@ -45,11 +45,13 @@ export default function ParallaxSection({
 
   // 버튼 클릭 핸들러
   const handleDetailClick = () => {
-    if (index === 0) {
-      router.push(detailLink);
-    } else {
-      window.location.href = 'mailto:admin@u-teed.co.kr';
-    }
+    router.push(detailLink);
+  };
+
+  // 프로젝트별 로고 경로
+  const logoImages: { [key: number]: string } = {
+    0: '/images/app_logo.png',
+    1: '/images/beepbeep_logo.svg',
   };
 
   return (
@@ -61,11 +63,11 @@ export default function ParallaxSection({
       }}
       id={id}
     >
-      {/* 첫 번째 섹션: 텍스트 위에만 로고 */}
-      {index === 0 && (
+      {/* 각 섹션별 로고 */}
+      {logoImages[index] && (
         <Image
-          src="/images/app_logo.png"
-          alt="로고"
+          src={logoImages[index]}
+          alt={`${highlight} 로고`}
           width={320}
           height={320}
           className="parallax-logo-img"
