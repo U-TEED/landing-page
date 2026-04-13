@@ -237,6 +237,57 @@ export default function BeepBeepPage() {
     ? serviceSections.find((section) => section.id === activeServiceId)
     : null;
 
+  const [ctaVisible, setCtaVisible] = useState(false);
+  const [ctaClosing, setCtaClosing] = useState(false);
+  const [ctaService, setCtaService] = useState(activeService);
+  const ctaTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const prevServiceIdRef = useRef<string | null>(null);
+  const pendingServiceRef = useRef(activeService);
+
+  useEffect(() => {
+    const prevId = prevServiceIdRef.current;
+    const newId = activeService?.id ?? null;
+    prevServiceIdRef.current = newId;
+    pendingServiceRef.current = activeService;
+
+    ctaTimersRef.current.forEach(clearTimeout);
+    ctaTimersRef.current = [];
+
+    const timer = (fn: () => void, ms: number) => {
+      const t = setTimeout(fn, ms);
+      ctaTimersRef.current.push(t);
+      return t;
+    };
+
+    if (newId && prevId && newId !== prevId) {
+      setCtaClosing(true);
+      timer(() => {
+        setCtaVisible(false);
+        setCtaClosing(false);
+        timer(() => {
+          setCtaService(pendingServiceRef.current);
+          setCtaVisible(true);
+        }, 50);
+      }, 600);
+    } else if (newId && !prevId) {
+      setCtaService(activeService);
+      setCtaClosing(false);
+      setCtaVisible(true);
+    } else if (!newId && prevId) {
+      setCtaClosing(true);
+      timer(() => {
+        setCtaVisible(false);
+        setCtaClosing(false);
+        setCtaService(null);
+      }, 600);
+    }
+
+    return () => {
+      ctaTimersRef.current.forEach(clearTimeout);
+      ctaTimersRef.current = [];
+    };
+  }, [activeService]);
+
   return (
     <div className={styles.scrollContainer}>
       <Header onNavClick={handleNavClick} />
@@ -321,27 +372,31 @@ export default function BeepBeepPage() {
           </section>
         ))}
 
-        {activeService && (
+        {ctaVisible && ctaService && (
           <div
-            className={`${styles.serviceCta} ${styles.serviceCtaVisible}`}
+            className={`${styles.serviceCta} ${
+              ctaClosing ? styles.serviceCtaClosing : styles.serviceCtaVisible
+            }`}
             role="status"
             aria-live="polite"
           >
             <div className={styles.serviceCtaText}>
-              <span className={styles.serviceCtaTitle}>{activeService.ctaLabel}</span>
+              <span className={styles.serviceCtaTitle}>{ctaService.ctaLabel}</span>
             </div>
-            <button
-              className={styles.serviceCtaButton}
-              aria-label={`${activeService.ctaLabel} 열기`}
-              type="button"
-              onClick={() => setServiceModalOpen(true)}
-            >
-              <span className={styles.serviceCtaButtonIcon} aria-hidden="true">
-                <svg viewBox="0 0 36 36" aria-hidden="true" focusable="false">
-                  <path d="M25.5,16.5h-5.9v-5.9c0-0.9-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v5.9h-5.9C9.7,16.5,9,17.1,9,18s0.7,1.5,1.5,1.5h5.9v5.9c0,0.9,0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5v-5.9h5.9c0.9,0,1.5-0.7,1.5-1.5S26.3,16.5,25.5,16.5z" />
-                </svg>
-              </span>
-            </button>
+            <div className={styles.serviceCtaButtonWrap}>
+              <button
+                className={styles.serviceCtaButton}
+                aria-label={`${ctaService.ctaLabel} 열기`}
+                type="button"
+                onClick={() => setServiceModalOpen(true)}
+              >
+                <span className={styles.serviceCtaButtonIcon} aria-hidden="true">
+                  <svg viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                    <path d="M25.5,16.5h-5.9v-5.9c0-0.9-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v5.9h-5.9C9.7,16.5,9,17.1,9,18s0.7,1.5,1.5,1.5h5.9v5.9c0,0.9,0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5v-5.9h5.9c0.9,0,1.5-0.7,1.5-1.5S26.3,16.5,25.5,16.5z" />
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
         )}
 
