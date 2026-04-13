@@ -13,27 +13,27 @@ const serviceSections = [
   {
     id: 'service',
     eyebrow: '문제 정의',
-    title: '경도인지장애, 조기 발견이 어렵습니다.',
+    title: '부모님을 매일 챙기고 싶지만, 현실은 어렵습니다.',
     description:
-      '경도인지장애는 치매의 전 단계로, 일상에서 뚜렷한 증상이 없어 발견이 늦어지는 경우가 많습니다. 정기적인 인지기능 모니터링이 필요하지만, 매번 병원을 방문하기 어렵습니다.',
+      '경도인지장애(MCI) 또는 초기 인지저하 단계에서는 매일의 복약, 식사, 컨디션, 일정 인지가 중요합니다. 하지만 보호자가 매일 직접 전화해 상태를 확인하기에는 시간적 부담이 큽니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '문제 정의 더 보기',
   },
   {
     id: 'service-call',
     eyebrow: '제품 개요',
-    title: 'AI 음성 통화로 인지기능을 정기적으로 확인합니다.',
+    title: 'AI가 보호자 목소리로 매일 전화해 일상을 확인합니다.',
     description:
-      '보호자가 등록한 목소리를 학습한 AI가 매일 자연스러운 통화를 진행합니다. 대화 중 기억력, 언어 능력, 시간 지남력 등을 분석해 인지기능 변화를 조기에 감지합니다.',
+      '보호자 앱에서 시간과 항목을 설정하면 AI가 정해진 시간에 부모님께 전화를 겁니다. 대화 응답은 복약, 식사, 컨디션, 병원 일정 인지 항목으로 구조화되어 보호자가 핵심만 빠르게 확인할 수 있습니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '제품 흐름 보기',
   },
   {
     id: 'service-feature',
     eyebrow: '주요 기능',
-    title: '인지기능 추적부터 알림까지, 케어의 모든 흐름을 통합합니다.',
+    title: '이상 신호를 감지하고 의료 기관 연계까지 이어집니다.',
     description:
-      '날짜별 인지기능 점수 추적, 통화 시나리오 관리, 캘린더 뷰, 보호자·의료진 연계까지. 한 곳에서 부모님의 인지 건강 상태를 확인하고 관리할 수 있습니다.',
+      '3일 연속 미복약, 일정 혼동 반복, 컨디션 저하 같은 패턴을 기반으로 조기 알림을 제공합니다. BeepBeep은 비의료 대체 서비스가 아니라 보호자와 병원·의료 시스템을 연결하는 의료 연계형 돌봄 보조 서비스입니다.',
     image: '/images/beepbeep_logo.svg',
     ctaLabel: '기능 더 보기',
   },
@@ -245,13 +245,13 @@ export default function BeepBeepPage() {
           <div className={`${styles.container} ${styles.heroGrid}`}>
             <div className={`${styles.heroContent} ${styles.reveal}`}>
               <h1 className={styles.heroTitle}>
-                AI 음성 통화로 경도인지장애를 조기에 발견하는 서비스, BeepBeep.
+                AI 전화로 부모님의 일상을 확인하고 의료 연계를 돕는 서비스, BeepBeep.
               </h1>
 
               <p className={styles.sub}>
-                보호자의 목소리를 학습한 AI가 매일 자연스러운 대화를 나누고,
+                보호자 목소리를 닮은 AI가 매일 전화해 복약·식사·컨디션·일정을 확인하고,
                 <br />
-                인지기능 변화를 분석해 경도인지장애 징후를 조기에 감지합니다.
+                결과를 구조화해 이상 신호 발생 시 의료 연계 판단을 빠르게 돕습니다.
               </p>
 
               <div className={styles.ctaRow}>
@@ -386,9 +386,9 @@ export default function BeepBeepPage() {
               <p className={styles.eyebrow}>사업 현황</p>
               <h2 className={styles.h2}>현재 단계와 목표</h2>
               <p className={styles.lead}>
-                AI 기반 인지기능 분석 기술을 검증하고 있으며,
+                실제 보호자 인터뷰를 바탕으로 서비스 흐름을 검증하고 있으며,
                 <br />
-                초기 파일럿 파트너와 함께 정확도를 높이고 있습니다.
+                소규모 파일럿을 통해 의료 연계 프로세스를 구체화하고 있습니다.
               </p>
 
               <div className={styles.ctaRow}>
