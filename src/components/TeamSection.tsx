@@ -129,8 +129,8 @@ const beepbeepTeamGroups = [
       },
       {
         name: '정민규',
-        role: 'Frontend',
-        desc: '프론트엔드 개발, 관리자용 앱 개발',
+        role: 'Algorithm',
+        desc: 'BeepBeep AI 개발',
         school: '홍익대학교',
         major: '소프트웨어융합학과',
         profileImage: '/images/team/정민규.png',

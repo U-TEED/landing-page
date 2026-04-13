@@ -111,16 +111,37 @@ function MainContent({ sectionRefs, introRef }: { sectionRefs: MutableRefObject<
     return () => observer.disconnect();
   }, []);
 
-  const totalSections = 4 + sections.length;
+  const sectionNames = [
+    'Fast to Act',
+    'Smart in Action',
+    'About U-TEED',
+    'Our Team',
+    'BeepBeep',
+    'SITE',
+  ];
+
+  const handleIndicatorClick = (index: number) => {
+    const allSections = getAllSections();
+    if (allSections[index]) {
+      setIsScrolling(true);
+      allSections[index].scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        setIsScrolling(false);
+      }, 800);
+    }
+  };
 
   return (
     <div className="App snap-container">
       <div className="side-indicator">
-        {Array.from({ length: totalSections }).map((_, i) => (
+        {sectionNames.map((name, i) => (
           <div 
             key={i} 
             className={`indicator-dot ${currentSectionIndex === i ? 'active' : ''}`}
-          />
+            onClick={() => handleIndicatorClick(i)}
+          >
+            <span className="indicator-tooltip">{name}</span>
+          </div>
         ))}
       </div>
       <IntroSection sectionRef={introRef} />

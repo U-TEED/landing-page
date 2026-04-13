@@ -436,6 +436,7 @@ code {
 }
 
 .indicator-dot {
+  position: relative;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -451,6 +452,40 @@ code {
 
 .indicator-dot:hover {
   background: rgba(0, 0, 0, 0.5);
+}
+
+.indicator-tooltip {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #222;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.indicator-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #222;
+}
+
+.indicator-dot:hover .indicator-tooltip {
+  opacity: 1;
+  visibility: visible;
 }
 
 .intro-slide {
