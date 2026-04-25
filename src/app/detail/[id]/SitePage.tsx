@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import FooterSection from '@/components/FooterSection';
 import TeamSection from '@/components/TeamSection';
+import { useFullPageScroll } from './useFullPageScroll';
 import styles from './site.module.css';
 
 const EMAIL = 'site@u-teed.co.kr';
@@ -53,25 +54,34 @@ const sections = [
   { id: 'team', label: '팀' },
 ];
 
+const snapSectionIds = [
+  'top',
+  ...serviceSections.map(s => s.id),
+  'beta',
+  'partner',
+  'team',
+];
+
 export default function SiteLandingPage() {
   const footerRef = useRef<HTMLElement>(null!);
   const heroRef = useRef<HTMLElement>(null!);
   const heroLogoRef = useRef<HTMLDivElement>(null!);
+  const scrollContainerRef = useRef<HTMLDivElement>(null!);
   const [activeSection, setActiveSection] = useState<string>('top');
   const [mounted, setMounted] = useState(false);
   const [activeServiceId, setActiveServiceId] = useState<string | null>(null);
   const [serviceModalOpen, setServiceModalOpen] = useState(false);
   const [serviceModalClosing, setServiceModalClosing] = useState(false);
 
+  const stableSectionIds = useMemo(() => snapSectionIds, []);
+  const { scrollToSection } = useFullPageScroll(scrollContainerRef, stableSectionIds);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleNavClick = (id: string) => {
-    scrollToSection(id);
-  };
+  const handleNavClick = (id: string) => scrollToSection(id);
 
-  // Section observer for indicator
   useEffect(() => {
     if (!mounted) return;
 
@@ -121,12 +131,7 @@ export default function SiteLandingPage() {
     }, 280);
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Reveal animation - CSS 클래스 기반으로 변경
+  // Reveal animation
   useEffect(() => {
     if (!mounted) return;
 
@@ -247,7 +252,7 @@ export default function SiteLandingPage() {
     : null;
 
   return (
-    <div className={styles.scrollContainer}>
+    <div className={styles.scrollContainer} ref={scrollContainerRef}>
       <Header onNavClick={handleNavClick} />
       <div className={styles.siteWrapper}>
         {/* Hero Section */}
