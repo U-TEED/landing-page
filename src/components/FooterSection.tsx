@@ -39,10 +39,10 @@ export default function FooterSection({ visible, footerRef }: FooterSectionProps
         >
           U-TEED
         </div>
-        <div>사업자 등록번호 : 000-00-00000 | 대표 : 임태호</div>
+        <div>사업자 등록번호 : 772-88-04055 | 대표 : 임태호</div>
+        <div>서울특별시 서대문구 연세로2나길 61, 1층(창천동, 캠퍼스타운 에스큐브)</div>
         <div>이메일: site@u-teed.co.kr</div>
         <div>Copyright © 2025 ~ 2026 U-TEED. All Rights Reserved.</div>
-        <div></div>
         {/* 버튼 영역 */}
         <div style={{ display: 'flex', gap: '1.2rem', marginTop: '1.7rem' }}>
           <a
