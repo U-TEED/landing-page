@@ -766,6 +766,24 @@ function PrivacyNotice() {
   );
 }
 
+/**
+ * 완료 화면 요약에서 tidy()로 줄바꿈을 다듬는 칸: 정해진 선택지 값만.
+ * 사용자가 입력한 글(한 줄 소개·자세한 내용·참고 링크·연락처 등)은 복사해도 그대로이도록 손대지 않는다.
+ */
+const CHOICE_FIELDS: ReadonlySet<FieldKey> = new Set<FieldKey>([
+  'category',
+  'services',
+  'stage',
+  'platforms',
+  'features',
+  'scope',
+  'purpose',
+  'draft',
+  'timeline',
+  'budget',
+  'source',
+]);
+
 function Complete({ done }: { done: Done }) {
   return (
     <div className={styles.wrap}>
@@ -790,7 +808,7 @@ function Complete({ done }: { done: Done }) {
             return value ? (
               <div key={key} className={styles.summaryRow}>
                 <dt>{FIELD_LABELS[key]}</dt>
-                <dd>{tidy(value)}</dd>
+                <dd>{CHOICE_FIELDS.has(key) ? tidy(value) : value}</dd>
               </div>
             ) : null;
           })}
