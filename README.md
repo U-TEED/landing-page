@@ -4,7 +4,7 @@
 
 ## 링크
 
-- 사이트: https://u-teed.co.kr/
+- 사이트: https://www.u-teed.co.kr/
 
 ## 개발/빌드
 

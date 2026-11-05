@@ -7,7 +7,8 @@ import './pretendard.css';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://u-teed.co.kr'),
+  // 실제 주소는 www다(u-teed.co.kr는 www로 308 리디렉트). canonical·공유 미리보기 주소가 리디렉트를 거치지 않게
+  metadataBase: new URL('https://www.u-teed.co.kr'),
   title: {
     default: meta.homeTitle,
     template: '%s | U-TEED',
