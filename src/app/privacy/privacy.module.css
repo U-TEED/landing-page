@@ -1,0 +1,44 @@
+/* /request와 같은 축(가운데, 640px) */
+.article {
+  display: grid;
+  gap: var(--sp-6);
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-block: var(--sp-7) var(--section-y);
+}
+
+.title {
+  font-size: var(--fs-h2-fluid);
+  font-weight: var(--fw-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.block {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.blockTitle {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+  gap: var(--sp-1) var(--sp-5);
+}
+
+.row dt {
+  color: var(--text-2);
+}
+
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
