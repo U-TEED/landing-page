@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import HashLink from '@/components/HashLink';
 import { meta } from '@/content/site';
-// Pretendard 하나로 한글·라틴 모두. 쓰는 굵기(400·600·700)의 @font-face만 사이트에서 직접 제공한다
+// Pretendard 하나로 한글·라틴 모두. 쓰는 굵기(400·600·700)의 @font-face와 글꼴 파일(public/fonts)을 모두 사이트에서 제공한다
 import './pretendard.css';
 import './globals.css';
 
@@ -40,8 +40,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko">
       <head>
         <link rel="license" href={licenseUrl} />
-        {/* 글꼴 파일(woff2)만 jsDelivr 고정 버전 주소에서 받는다 */}
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
       </head>
       <body>
         {/* 기본 해시 이동은 Next 라우터가 모르는 히스토리 항목을 만들어 뒤로 가기를 멈추게 하므로 HashLink로 */}
