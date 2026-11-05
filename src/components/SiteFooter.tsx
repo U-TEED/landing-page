@@ -36,7 +36,7 @@ export default function SiteFooter({ current }: Props) {
             </div>
           </dl>
           <div className={styles.bottom}>
-            {/* 개인정보 보호법 시행령 제31조 3항: 다른 고지와 구분되게(굵게·주 텍스트 색) 표시 */}
+            {/* 표준 개인정보 보호지침 제20조: '개인정보 처리방침' 명칭을 쓰고 다른 고지와 구분되게(굵게·주 텍스트 색) 표시 */}
             <Link
               href={footer.privacyLink.href}
               className={styles.privacy}

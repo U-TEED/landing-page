@@ -3,14 +3,19 @@
  *
  * 하는 일
  *   Next.js 서버(/api/request)가 검증해서 보낸 의뢰를 받아
- *   1. 이 스크립트가 묶인 비공개 스프레드시트에 한 행으로 저장하고
+ *   1. 스크립트 속성 SHEET_ID가 가리키는 비공개 스프레드시트에 한 행으로 저장하고
  *   2. 운영자 메일, (선택) Slack, (선택) 의뢰자 자동 회신을 보낸다.
  *
- * 지키는 계약: request-contract.md (열 이름·순서, 접수 번호 형식, 응답 형식, 메일 제목·본문, 처리 순서)
+ * 스크립트는 스프레드시트에 묶지 않은 독립 프로젝트다. 파기할 때 저장 파일을 사본으로 바꿔도
+ * SHEET_ID만 고치면 되고 웹 앱 주소와 Vercel 설정은 그대로다(README '운영할 때').
+ *
+ * 열 이름·순서, 접수 번호 형식, 응답 형식, 항목 이름은 사이트(src/lib/request/schema.ts,
+ * src/app/api/request/route.ts)와 맞춘 약속이다. 한쪽을 바꾸면 다른 쪽도 함께 고친다.
  * 설정 방법: 같은 폴더의 README.md
  *
  * 스크립트 속성 (프로젝트 설정 > 스크립트 속성)
  *   SECRET             필수. Vercel의 REQUEST_ENDPOINT_SECRET과 같은 값. 없으면 모든 요청을 거절한다.
+ *   SHEET_ID           필수. 저장할 스프레드시트 ID(주소의 /d/와 /edit 사이). 주소 전체를 넣어도 된다.
  *   NOTIFY_EMAIL       운영자 알림을 받을 주소. 기본 taeho@u-teed.co.kr
  *   SLACK_WEBHOOK_URL  선택. Slack Incoming Webhook URL (https://...)
  *   AUTO_REPLY         "true"일 때만 의뢰자에게 자동 회신 메일을 보낸다. 기본 꺼짐.
@@ -47,14 +52,14 @@ var CATEGORY_BIZ = '사업 문서·컨설팅';
 var CATEGORY_UNSURE = '아직 모르겠어요';
 var CATEGORIES = [CATEGORY_DEV, CATEGORY_BIZ, CATEGORY_UNSURE];
 
-// 시트 열 이름·순서 (계약 4절 7항). 1행 헤더에 그대로 쓴다.
+// 시트 열 이름·순서. 1행 헤더에 그대로 쓴다. 사이트의 항목 키(src/lib/request/schema.ts)와 같다.
 var COLUMNS = [
   'receipt_no', 'received_at', 'category', 'services', 'title', 'description', 'stage', 'references',
   'platforms', 'features', 'scope', 'purpose', 'program_name', 'deadline', 'draft',
   'timeline', 'budget', 'name', 'company', 'email', 'phone', 'source'
 ];
 
-// 한국어 항목명 (계약 5절)
+// 한국어 항목명 (사이트 폼 라벨과 같다)
 var LABELS = {
   category: '의뢰 분야',
   services: '세부 항목',
@@ -78,7 +83,7 @@ var LABELS = {
   source: '알게 된 경로'
 };
 
-// 길이 상한(문자 수 = 코드포인트). 계약에 상한이 없는 짧은 선택값과 목록 항목은 아래 값으로 막는다.
+// 길이 상한(문자 수 = 코드포인트). 따로 정한 상한이 없는 짧은 선택값과 목록 항목은 아래 값으로 막는다.
 // 목록 개수 20은 Next.js 서버(parseIncoming)가 받는 상한과 같다. 서버가 통과시킨 값을 여기서 거절하지 않는다.
 var SHORT_TEXT_MAX = 100;
 var LIST_ITEMS_MAX = 20;
@@ -127,7 +132,8 @@ function doGet() {
 /**
  * 처음 한 번 편집기에서 실행한다.
  * - 실행하면 Google이 권한 승인을 요청한다(시트, 메일 보내기, 외부 요청).
- * - SECRET 속성이 있는지 확인하고, 시트와 헤더 행을 만든다.
+ * - SECRET·SHEET_ID 속성을 확인하고, SHEET_ID 파일에 시트와 헤더 행을 만든다.
+ * - 파기하며 저장 파일을 사본으로 바꾼 뒤에도 한 번 실행해 실행 로그의 '저장할 파일'로 위치를 확인한다.
  */
 function setup() {
   var secret = getSetting_('SECRET');
@@ -165,6 +171,7 @@ function setup() {
   }
 
   console.log('준비 완료');
+  console.log('- 저장할 파일: ' + sheet.getParent().getName() + ' (' + sheet.getParent().getUrl() + ')');
   console.log('- 저장할 시트: ' + sheet.getName() + ' (1행 = 열 이름)');
   console.log('- 운영자 알림 메일: ' + notifyEmail);
   console.log('- Slack 알림: ' + (slackUrl ? '켜짐' : '꺼짐'));
@@ -173,7 +180,7 @@ function setup() {
 }
 
 /* ------------------------------------------------------------------ */
-/* 처리 순서 (계약 4절)                                                 */
+/* 처리 순서                                                            */
 /* ------------------------------------------------------------------ */
 
 function handleRequest_(e) {
@@ -208,7 +215,7 @@ function handleRequest_(e) {
   if (saved.error) return saved.error;
   if (saved.duplicate) {
     console.log('duplicate', saved.receiptNo);
-    // 계약대로 처음 번호를 돌려주지만, 내용이 바뀐 재전송(고쳐서 다시 보냄)은 시트에 남지 않으므로 운영자가 알 수 있게 남긴다.
+    // 처음 번호를 그대로 돌려주지만, 내용이 바뀐 재전송(고쳐서 다시 보냄)은 시트에 남지 않으므로 운영자가 알 수 있게 남긴다.
     if (saved.payloadChanged) console.warn('duplicate_payload_mismatch', saved.receiptNo);
     return success_(saved.receiptNo, saved.receivedAt);
   }
@@ -374,7 +381,7 @@ function addError_(errors, key) {
   if (errors.indexOf(key) === -1) errors.push(key);
 }
 
-/** 문자 수 = 코드포인트 수 (계약: [...s].length) */
+/** 문자 수 = 코드포인트 수 (사이트의 [...s].length와 같다) */
 function charLength_(text) {
   return Array.from(text).length;
 }
@@ -532,12 +539,32 @@ function padSequence_(sequence) {
 }
 
 function getRequestSheet_() {
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  if (!spreadsheet) throw new Error('bound spreadsheet not found');
+  var spreadsheet = openSpreadsheet_();
   var name = getSetting_('SHEET_NAME') || DEFAULT_SHEET_NAME;
   var sheet = spreadsheet.getSheetByName(name) || spreadsheet.insertSheet(name);
   ensureHeader_(sheet);
   return sheet;
+}
+
+/**
+ * 저장할 스프레드시트: 스크립트 속성 SHEET_ID. ID 대신 주소(https://docs.google.com/spreadsheets/d/…/edit)를 넣어도 연다.
+ * 파기할 때 파일을 사본으로 바꾸면(README '운영할 때') 이 값만 고친다. 웹 앱 주소와 Vercel 설정은 그대로다.
+ * 열지 못하면 실행 기록에 sheet_open_failed를 남긴다(README '문제가 생겼을 때').
+ */
+function openSpreadsheet_() {
+  var value = getSetting_('SHEET_ID');
+  if (!value) {
+    console.error('sheet_open_failed', '-', 'missing_sheet_id');
+    throw new Error('스크립트 속성 SHEET_ID가 없습니다. 의뢰를 저장할 스프레드시트 주소에서 /d/와 /edit 사이 값을 SHEET_ID로 넣으세요. (README 5단계)');
+  }
+  // 주소면 /d/ 뒤의 ID만 쓴다(여러 계정에 로그인하면 /spreadsheets/u/1/d/… 꼴도 나온다)
+  var fromUrl = value.match(/\/d\/([A-Za-z0-9_-]+)/);
+  try {
+    return SpreadsheetApp.openById(fromUrl ? fromUrl[1] : value);
+  } catch (err) {
+    logError_('sheet_open_failed', null, err);
+    throw new Error('SHEET_ID로 스프레드시트를 열지 못했습니다. 값이 맞는지, 이 Google 계정이 그 파일을 편집할 수 있는지 확인하세요. (README 5단계)');
+  }
 }
 
 /** 1행이 비어 있으면 헤더를 쓴다. 이미 무언가 있으면(이름을 바꿨더라도) 건드리지 않는다. */
@@ -792,7 +819,7 @@ function displayTime_(iso) {
 }
 
 /**
- * 메일 제목용 (계약 4절 8항 "제목의 줄바꿈 제거"): 줄바꿈과 다른 제어 문자가 이어진 곳마다 공백 하나로 바꿔 한 줄로 만든다.
+ * 메일 제목용(제목의 줄바꿈 제거): 줄바꿈과 다른 제어 문자가 이어진 곳마다 공백 하나로 바꿔 한 줄로 만든다.
  * 그 밖의 글자는 바꾸지 않는다. 제목 안의 연속 공백·NBSP·전각 공백도 {title}에 적힌 그대로 둔다.
  */
 function singleLine_(value) {
