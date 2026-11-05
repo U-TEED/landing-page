@@ -18,7 +18,7 @@ npm run start
 
 - `/` 원페이지 회사 소개 (회사 / 사업 / 외주 / 연혁 / 문의)
 - `/request` 외주 의뢰 3단계 폼
-- `/privacy` 개인정보 처리방침 (본문은 직접 작성)
+- `/privacy` 개인정보 처리방침 (초안. 본문은 `src/content/privacy.ts`. 보유 기간·파기 문구는 Apps Script 안내의 '운영할 때' 절차와 함께 고칩니다)
 - `POST /api/request` 의뢰 접수 API
 
 ## 구조
@@ -28,6 +28,7 @@ npm run start
 - `src/lib/request/schema.ts`: 의뢰 폼 필드·선택지·검사 규칙. 브라우저와 서버가 같은 파일을 씁니다.
 - `src/components/`: 섹션·폼 컴포넌트
 - `integrations/google-apps-script/`: 의뢰 저장·알림용 Google Apps Script와 설정 안내
+- `public/fonts/pretendard-1.3.9/`: Pretendard 글꼴 파일. 방문자 브라우저가 외부 CDN에 요청하지 않도록 사이트에서 직접 제공합니다.
 
 ## 비어 있는 칸 채우기
 
@@ -52,3 +53,5 @@ npm run start
 ## 라이선스
 본 프로젝트의 문서/콘텐츠는 `Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)`에 따라 이용할 수 있습니다.
 라이선스 전문: https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+글꼴 Pretendard는 SIL Open Font License 1.1을 따릅니다(`public/fonts/pretendard-1.3.9/LICENSE.txt`).
